@@ -20,7 +20,7 @@ class MakeCategoryScreen extends StatefulWidget {
 }
 
 class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
-  List<bool> categoryList = List.filled(14, false);
+  List<bool> categoryList = List.filled(15, false);
   List<String> selectedOptions = [];
 
   @override
@@ -378,7 +378,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                       imageAsset: 'assets/images/category_images/cook.png',
                       text: '요리',
                     ),
-                    SizedBox(width: 12.0.w),
+                    SizedBox(width: 8.0.w),
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
@@ -399,6 +399,27 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                       containerColor: categoryList[13] == true ? MIXIN_ : WHITE,
                       imageAsset: 'assets/images/category_images/finance.png',
                       text: '금융',
+                    ),
+                    SizedBox(width: 8.0.w),
+                    CategoryLayoutRound(
+                      mainSizedBoxWidth: 99.w,
+                      borderSideColor:
+                      categoryList[14] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                      backgroundColor: categoryList[14] == true ? MIXIN_ : WHITE,
+                      onPressed: () {
+                        setState(() {
+                          categoryList[14] = !categoryList[14];
+                          if (categoryList[14] == true) {
+                            selectedOptions.add('기타');
+                          } else if (categoryList[14] == false) {
+                            selectedOptions.remove('기타');
+                          }
+                        });
+                        print(selectedOptions);
+                      },
+                      containerColor: categoryList[14] == true ? MIXIN_ : WHITE,
+                      imageAsset: 'assets/images/category_images/etc.png',
+                      text: '기타',
                     ),
                   ],
                 ),

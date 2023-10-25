@@ -27,40 +27,35 @@ class CategoryLayoutRound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: mainSizedBoxWidth,
-      height: 44.h,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          side: BorderSide(color: borderSideColor),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(36.r),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        side: BorderSide(color: borderSideColor),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(36.r),
+        ),
+        padding: EdgeInsets.only(left: 12.w, right: 16.w, top: 9.h, bottom: 9.h),
+        elevation: 0.0,
+        backgroundColor: backgroundColor,
+      ),
+      onPressed: onPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            '$imageAsset',
+            width: 26.w,
+            height: 26.h,
           ),
-          padding: EdgeInsets.only(left: 12.w, right: 16.w),
-          elevation: 0.0,
-          backgroundColor: backgroundColor,
-        ),
-        onPressed: onPressed,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              '$imageAsset',
-              width: 26.w,
-              height: 26.h,
+          SizedBox(width: 8.w),
+          Text(
+            '$text',
+            style: TextStyle(
+              fontSize: 14.0.sp,
+              fontWeight: FontWeight.w500,
+              color: MIXIN_BLACK_1,
             ),
-            SizedBox(width: 8.w),
-            Text(
-              '$text',
-              style: TextStyle(
-                fontFamily: 'SUIT',
-                fontSize: 14.0.sp,
-                fontWeight: FontWeight.w500,
-                color: MIXIN_BLACK_1,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

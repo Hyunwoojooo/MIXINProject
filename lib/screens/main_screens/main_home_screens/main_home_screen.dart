@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mixin_mac_2/const/data.dart';
+import 'package:mixin_mac_2/screens/make_regular_meeting.dart';
 import '../../../const/colors.dart';
 import 'main_home_home_screen.dart';
 import 'main_home_moim_screen.dart';
@@ -75,7 +76,6 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                         unselectedLabelColor: MIXIN_BLACK_1,
                         labelStyle: TextStyle(
                           fontSize: 16.sp,
-                          fontFamily: 'SUIT',
                           fontWeight: FontWeight.w600,
                         ),
                         indicator: BoxDecoration(
@@ -98,30 +98,12 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                             child: Image.asset(
                                 'assets/images/point_color_dot.png')),
                         IconButton(
-                          onPressed: () async {
-                            Dio dio = Dio();
-                            String? refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
-                            try {
-                              final Response respOnlyImage = await dio.get(
-                                url,
-                                options: Options(
-                                  headers: {
-                                    "Authorization": jsonDecode(refreshToken!)[0],
-                                  },
-                                ),
-                              );
-                              print(respOnlyImage);
-                            } catch (e) {
-                              if (e is DioError) {
-                                if (e.response != null) {
-                                  print('DioError response: ${e.response}');
-                                } else {
-                                  print('DioError error: $e');
-                                }
-                              } else {
-                                print('Unexpected error: $e');
-                              }
-                            }
+                          onPressed: (){
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const MakeRegularMeeting(),
+                              ),
+                            );
                           },
                           icon: Image.asset(
                             'assets/images/black_bell_3x.png',

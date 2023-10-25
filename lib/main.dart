@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:mixin_mac_2/screens/login_screen.dart';
 import 'package:mixin_mac_2/screens/main_screens/main_bottom_navigation_bar.dart';
-import 'package:mixin_mac_2/screens/moim/moim_detail_screens/moim_detail_screen.dart';
+import 'package:mixin_mac_2/screens/main_screens/main_home_screens/main_home_screen.dart';
+import 'package:mixin_mac_2/screens/main_screens/main_moim_screens/main_moim_screen.dart';
+import 'package:mixin_mac_2/screens/make_profile_card_screens/make_category_screen.dart';
 
 Future<void> main() async {
   await initializeDateFormatting();
@@ -28,7 +31,7 @@ class Mixin extends StatelessWidget {
           ),
           initialRoute: '/',
           routes: {
-            '/': (context) => MoimDetailScreen(),
+            '/': (context) => const MainMoimScreen(),
           },
         );
       },

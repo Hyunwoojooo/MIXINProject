@@ -8,11 +8,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mixin_mac_2/const/data.dart';
 import '../../const/colors.dart';
 import '../../layout/appbar_layout.dart';
-import '../../layout/custom_floating_action_button.dart';
 import '../../components/buttons/moim_cycle_button.dart';
 import '../../components/buttons/moim_rules.dart';
 import '../../components/buttons/moim_term_button.dart';
 import 'make_moim_4.dart';
+
 
 class MeetingPage3 extends StatefulWidget {
   const MeetingPage3({Key? key}) : super(key: key);

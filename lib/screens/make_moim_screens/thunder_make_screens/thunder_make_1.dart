@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import '../../../components/buttons/choice_gender_button.dart';
 import '../../../components/buttons/choice_numb_button.dart';
 import '../../../const/colors.dart';
@@ -13,6 +14,23 @@ class ThunderMake1 extends StatefulWidget {
 }
 
 class _ThunderMake1State extends State<ThunderMake1> {
+  DateTime? today;
+  DateTime? previousDate;
+  int? day;
+  String? date;
+  int isChecked = 0;
+
+  @override
+  void initState() {
+    today = DateTime.now();
+    previousDate = today?.subtract(const Duration(days: 2));
+    print(previousDate);
+    day = int.parse(DateFormat('d').format(today!));
+
+    print(DateFormat('d').format(today!));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,16 +75,45 @@ class _ThunderMake1State extends State<ThunderMake1> {
                 SizedBox(height: 36.h),
                 _text('모임 날짜'),
                 SizedBox(height: 12.h),
-                SizedBox(
+                Container(
+                  // color: Colors.red,
                   height: 80.h,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
+                      itemCount: 7,
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
                             OutlinedButton(
-                              onPressed: () {},
-                              child: Text('asdf'),
+                              style: OutlinedButton.styleFrom(
+                                  backgroundColor: MIXIN_,
+                                  shape: CircleBorder(),
+                                  padding: EdgeInsets.all(10.h),
+                                  side: BorderSide(
+                                    color: MIXIN_2,
+                                  )),
+                              onPressed: () {
+                                isChecked = index;
+                                print(isChecked);
+                              },
+                              child: Text(
+                                '${day! + index}',
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: MIXIN_POINT_COLOR,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 8.h),
+                            Text(
+                              index == 0 ? '오늘' : DateFormat('E', 'ko_KR')
+                                  .format(today!.add(Duration(days: index))),
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                                color: MIXIN_POINT_COLOR,
+                              ),
                             ),
                           ],
                         );

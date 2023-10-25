@@ -353,7 +353,7 @@ class _MainProfileScreen1State extends State<MainProfileScreen1> {
                           ),
                           SizedBox(width: 7.w),
                           Container(
-                            color: MIXIN_,
+                            color: WHITE,
                             width: 228.w,
                             child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixin_mac_2/const/data.dart';
 
 import '../const/colors.dart';
 
@@ -264,7 +265,10 @@ class MyMoimCard extends StatelessWidget {
   void Function() onPressed;
   Color? bellColor;
   String moimName;
-  List<String> tag;
+  List tag;
+  final String imageUrl = 'http://$ip/upload';
+
+
 
   MyMoimCard(
       {required this.bellColor,
@@ -313,17 +317,15 @@ class MyMoimCard extends StatelessWidget {
               children: [
                 Container(
                   height: 192.h,
+                  width: 342.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(8.r),
                       topLeft: Radius.circular(8.r),
                     ),
-                    image: DecorationImage(
-                      image: AssetImage(backgroundImage),
-                      fit: BoxFit.fitHeight,
-
-                    ),
                   ),
+                  child: Image.network(
+                    '$imageUrl$backgroundImage', fit: BoxFit.fitWidth,),
                 ),
                 Positioned(
                   top: 16.h,

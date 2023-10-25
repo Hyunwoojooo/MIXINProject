@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mixin_mac_2/components/calendar.dart';
@@ -20,10 +23,13 @@ class MakeRegularMeeting extends StatefulWidget {
 class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
   TextEditingController? moimName;
   TextEditingController? moimPlace;
-  TextEditingController? moimInfo;
-  String regularMoimDate = '정기모임 날짜를 선택해주세요';
+  TextEditingController? moimDescription;
+  String moimDate = '정기모임 날짜를 선택해주세요';
   String hour = '333';
-  String? minute = '00';
+  String minute = '00';
+
+  Dio dio = Dio();
+  final String url = 'asdfa';
 
   @override
   void initState() {
@@ -31,7 +37,7 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
     super.initState();
     moimName = TextEditingController();
     moimPlace = TextEditingController();
-    moimInfo = TextEditingController();
+    moimDescription = TextEditingController();
   }
 
   @override
@@ -104,9 +110,9 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
-                        regularMoimDate.length == 10 ? MIXIN_ : WHITE,
+                        moimDate.length == 10 ? MIXIN_ : WHITE,
                     side: BorderSide(
-                        color: regularMoimDate.length == 10
+                        color: moimDate.length == 10
                             ? MIXIN_
                             : MIXIN_BLACK_5,
                         width: 1.5.w),
@@ -154,9 +160,9 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                                     if (prefs
                                         .getString('regularMoimDate')!
                                         .isNotEmpty) {
-                                      regularMoimDate =
+                                      moimDate =
                                           prefs.getString('regularMoimDate')!;
-                                      regularMoimDate = regularMoimDate
+                                      moimDate = moimDate
                                           .substring(0, 10)
                                           .replaceAll('-', '.');
                                     }
@@ -183,11 +189,11 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        regularMoimDate,
+                        moimDate,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
-                          color: regularMoimDate.length == 15
+                          color: moimDate.length == 15
                               ? MIXIN_BLACK_4
                               : MIXIN_BLACK_1,
                         ),
@@ -358,7 +364,7 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  '게시글',
+                  '모임 정보',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
@@ -367,15 +373,15 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                 ),
                 SizedBox(height: 12.h),
                 CustomTextFormField(
-                  hintText: '게시글을 입력해주세요',
-                  controller: moimInfo,
+                  hintText: '모임 정보를 입력해주세요',
+                  controller: moimDescription,
                   onChanged: (value) {
                     setState(() {});
                   },
                   height: 220.h,
                   borderColor:
-                      moimInfo!.text.isNotEmpty ? MIXIN_ : MIXIN_BLACK_5,
-                  fillColor: moimInfo!.text.isNotEmpty ? MIXIN_ : WHITE,
+                      moimDescription!.text.isNotEmpty ? MIXIN_ : MIXIN_BLACK_5,
+                  fillColor: moimDescription!.text.isNotEmpty ? MIXIN_ : WHITE,
                   maxLines: 10,
                 ),
                 SizedBox(height: 24.h),
@@ -388,7 +394,9 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                       ),
                       elevation: 0.0,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      fetch();
+                    },
                     child: SizedBox(
                       width: 342.w,
                       height: 56.h,
@@ -412,4 +420,34 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
       ),
     );
   }
+  void fetch() async {
+    String moimTime = '$hour : $minute';
+    String? refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
+
+    // dio 사용
+    try {
+      Options options = Options(
+        headers: {
+          "Authorization": jsonDecode(refreshToken!)[0],
+        },
+        method: 'POST',
+      );
+
+      final Response resp = await dio.post(
+        url,
+        options: options,
+        data: {
+          "regularMoimName": moimName,
+          "regularMoimPlace": moimPlace,
+          "regularMoimDate": moimTime,
+          "regularMoimTime": moimTime,
+          "regularMoimDescription": moimDescription,
+        },
+      );
+      print(resp);
+    } catch (e) {
+      print('DioError error: $e');
+    }
+  }
+
 }
