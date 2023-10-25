@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -10,8 +11,16 @@ import 'package:mixin_mac_2/screens/make_moim_screens/make_moim_3.dart';
 import 'package:mixin_mac_2/screens/make_regular_meeting.dart';
 import 'package:mixin_mac_2/screens/moim/moim_screens/moim_main_screen.dart';
 
+import 'firebase_options.dart';
+
 Future<void> main() async {
   await initializeDateFormatting();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform
+  );
+
   runApp(const Mixin());
 }
 
@@ -34,7 +43,7 @@ class Mixin extends StatelessWidget {
           ),
           initialRoute: '/',
           routes: {
-            '/': (context) => MakeRegularMeeting(),
+            '/': (context) => LoginScreen(),
           },
         );
       },

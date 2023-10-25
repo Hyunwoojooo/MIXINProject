@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562734395057",
+    "project_id": "mixin-c9ebd",
+    "storage_bucket": "mixin-c9ebd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562734395057:android:f149039bbbae8bffb77c90",
+        "android_client_info": {
+          "package_name": "com.example.mixin_mac_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfdACtLwRLiGlNjPIhxmvxpwG_LQ2SrLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
