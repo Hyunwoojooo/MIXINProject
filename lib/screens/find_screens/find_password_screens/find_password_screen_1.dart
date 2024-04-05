@@ -174,7 +174,7 @@ class _FindPasswordScreen1State extends State<FindPasswordScreen1> {
                         fontFamily: 'SUIT',
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
-                        color: MIXIN_BLACK_1,
+                        color: B_1,
                       ),
                     )
                   ],
@@ -201,7 +201,7 @@ class _FindPasswordScreen1State extends State<FindPasswordScreen1> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     decoration: BoxDecoration(
-                      color: MIXIN_BLACK_5,
+                      color: B_5,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(18.r),
                     ),
@@ -211,7 +211,7 @@ class _FindPasswordScreen1State extends State<FindPasswordScreen1> {
                         fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
-                        color: MIXIN_POINT_COLOR,
+                        color: P_1,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -222,7 +222,7 @@ class _FindPasswordScreen1State extends State<FindPasswordScreen1> {
                 SizedBox(height: 12.0.h),
                 CustomTextFormField(
                   controller: _userNameTextEditController,
-                  hintText: '이메일 또는 휴대폰 번호를 입력해주세요',
+                  hintText: '이메일 또는 휴대전화번호를 입력해주세요',
                   onChanged: (String value) async {
                     userName = value;
                   },
@@ -232,8 +232,8 @@ class _FindPasswordScreen1State extends State<FindPasswordScreen1> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: userCertificationNumber.length == 6
-                            ? MIXIN_POINT_COLOR
-                            : MIXIN_BLACK_4,
+                            ? P_1
+                            : B_4,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
                         elevation: 0.0),
@@ -270,7 +270,6 @@ class _FindPasswordScreen1State extends State<FindPasswordScreen1> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.sp,
-                            fontFamily: 'SUIT',
                             fontWeight: FontWeight.w600,
                           ),
                         ),

@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mixin_mac_2/screens/main_screens/main_bottom_navigation_bar.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../components/custom_textformfield.dart';
@@ -61,49 +62,50 @@ class _MakeIntroduceScreenState extends State<MakeIntroduceScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppbarLayout(
+                AppbarIconTextLayout(
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  text: '프로필카드제작',
+                  width: 99.w,
                 ),
-                SizedBox(height: 45.0.h),
+                SizedBox(height: 63.h),
                 Center(
                   child: Text(
                     '자신을 표현할 수 있는\n별명, 한마디를 적어주세요',
                     style: TextStyle(
-                      fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
-                      fontSize: 24.0.sp,
+                      fontSize: 28.sp,
+                      color: B_1
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 12.0.h),
+                SizedBox(height: 10.h),
                 Center(
                   child: Container(
                     alignment: Alignment.center,
                     width: 203.w,
                     height: 36.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18.0.r),
-                      color: MIXIN_BLACK_5,
+                      borderRadius: BorderRadius.circular(18.r),
+                      color: B_5,
                     ),
                     child: Text(
                       '나중에 작성해주셔도 괜찮아요!',
                       style: TextStyle(
-                        fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
-                        fontSize: 14.0.sp,
-                        color: MIXIN_POINT_COLOR,
+                        fontSize: 14.sp,
+                        color: P_1,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 47.h),
+                SizedBox(height: 44.h),
                 Center(
                   child: GestureDetector(
                     onTap: (() {
@@ -117,7 +119,7 @@ class _MakeIntroduceScreenState extends State<MakeIntroduceScreen> {
                           height: 87.h,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: MIXIN_BLACK_5,
+                            color: B_5,
                             boxShadow: [
                               BoxShadow(color: Colors.grey, blurRadius: 1.0)
                             ],
@@ -131,36 +133,49 @@ class _MakeIntroduceScreenState extends State<MakeIntroduceScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 35.h),
+                SizedBox(height: 30.h),
                 // 닉네임
                 Center(
                   child: CustomTextFormField(
-                    width: 222.w,
+                    width: 230.w,
                     controller: _userNickNameTextEditController,
                     onChanged: (String value) async {
+                      setState(() {});
+                      userNickName = value;
                       await storage.write(
                           key: 'userNickName', value: userNickName);
                       print(userNickName);
                     },
-                    hintText: '닉네임',
+                    hintText: '이름을 작성해주세요',
                   ),
                 ),
                 // 0/8
                 Center(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 200.0.w, top: 4.h),
-                    child: Text(
-                      '$userNickNameLength/8',
-                      style: TextStyle(
-                        fontFamily: 'SUIT',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12.sp,
-                        color: MIXIN_BLACK_4,
-                      ),
+                    padding: EdgeInsets.only(left: 264.w, top: 4.h),
+                    child: Row(
+                      children: [
+                        Text(
+                          '${userNickName.length}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: P_1,
+                          ),
+                        ),
+                        Text(
+                          '/8',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: B_4,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(height: 33.h),
+                SizedBox(height: 22.h),
                 // 자기소개
                 Center(
                   child: CustomTextFormField(
@@ -168,28 +183,37 @@ class _MakeIntroduceScreenState extends State<MakeIntroduceScreen> {
                     controller: _userIntroduceTextEditController,
                     onChanged: (String value) async {
                       userIntroduceText = value;
-                      setState(() {
-                        userIntroduceText = value;
-                      });
+                      setState(() {});
                       await storage.write(
                           key: 'userIntroduceText', value: userIntroduceText);
                       print(userIntroduceText);
                     },
                     hintText: '자기 소개를 작성해주세요.',
-                    maxLines: 6,
+                    maxLines: 8,
                   ),
                 ),
                 // 0/80
                 Padding(
-                  padding: EdgeInsets.only(left: 300.0.w, top: 10.h),
-                  child: Text(
-                    '$userIntroduceTextLength/80',
-                    style: TextStyle(
-                      fontFamily: 'SUIT',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12.sp,
-                      color: MIXIN_BLACK_4,
-                    ),
+                  padding: EdgeInsets.only(left: 325.w, top: 10.h),
+                  child: Row(
+                    children: [
+                      Text(
+                        '${userIntroduceText.length}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.sp,
+                          color: P_1,
+                        ),
+                      ),
+                      Text(
+                        '/80',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.sp,
+                          color: B_4,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 38.h),
@@ -197,7 +221,7 @@ class _MakeIntroduceScreenState extends State<MakeIntroduceScreen> {
                 Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: MIXIN_POINT_COLOR,
+                        backgroundColor: P_1,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0.r)),
                         elevation: 0.0),
@@ -209,7 +233,7 @@ class _MakeIntroduceScreenState extends State<MakeIntroduceScreen> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
-                              const CompleteProfileCardScreen(),
+                              const MainBottomNavigationBar(),
                         ),
                       );
                     },
@@ -339,7 +363,7 @@ class _MakeIntroduceScreenState extends State<MakeIntroduceScreen> {
             height: 90.h,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: MIXIN_BLACK_5,
+              color: B_5,
               boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1.0)],
             ),
             child: Center(

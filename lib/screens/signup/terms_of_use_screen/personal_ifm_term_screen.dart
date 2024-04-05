@@ -29,23 +29,22 @@ class PersonalIfmterm extends StatelessWidget {
             ),
           ],
         ),
-        width: 342.w,
+        width: 358.w,
         height: 56.h,
         child: RawMaterialButton(
-          fillColor: MIXIN_POINT_COLOR,
+          fillColor: P_1,
           elevation: 0.0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0.r),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           onPressed: () {
             Navigator.pop(context);
           },
           child: Text(
-            '확인',
+            '동의',
             style: TextStyle(
               color: Colors.white,
               fontSize: 18.sp,
-              fontFamily: 'SUIT',
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -54,39 +53,42 @@ class PersonalIfmterm extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppbarCloseLayout(onPressed: () {
-                  Navigator.pop(context);
-                }),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: AppbarCloseLayout(onPressed: () {
+                    Navigator.of(context);
+                  }),
+                ),
                 SizedBox(height: 45.h),
                 Text(
                   '개인정보 수집 및 이용 동의 (필수)',
                   style: TextStyle(
-                    fontFamily: 'SUIT',
                     fontWeight: FontWeight.w600,
-                    fontSize: 26.0.sp,
+                    fontSize: 26.sp,
+                    color: B_1,
                   ),
                 ),
-                SizedBox(height: 24.0.h),
+                SizedBox(height: 24.h),
                 HeadlineTosText(text: '수집하는 개인정보의 항목'),
                 SizedBox(height: 16.h),
                 BodyText(text: first),
-                SizedBox(height: 24.0.h),
+                SizedBox(height: 24.h),
                 HeadlineTosText(text: '수집한 개인정보의 처리 목적'),
                 SizedBox(height: 16.h),
                 BodyText(text: second),
-                SizedBox(height: 24.0.h),
+                SizedBox(height: 24.h),
                 HeadlineTosText(text: '수집한 개인정보의 보관 및 파기'),
                 SizedBox(height: 16.h),
                 BodyText(text: third),
-                SizedBox(height: 24.0.h),
+                SizedBox(height: 24.h),
                 HeadlineTosText(text: '기타'),
                 SizedBox(height: 16.h),
                 BodyText(text: fourth),
-                SizedBox(height: 100.0.h)
+                SizedBox(height: 100.h)
               ],
             ),
           ),

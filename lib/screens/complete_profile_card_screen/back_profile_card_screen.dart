@@ -110,7 +110,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0.sp,
-                      color: _currentPage == 0 ? MIXIN_47 : MIXIN_BLACK_4,
+                      color: _currentPage == 0 ? MIXIN_47 : B_4,
                     ),
                   ),
                 ),
@@ -128,7 +128,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0.sp,
-                      color: _currentPage == 1 ? MIXIN_47 : MIXIN_BLACK_4,
+                      color: _currentPage == 1 ? MIXIN_47 : B_4,
                     ),
                   ),
                 ),
@@ -142,7 +142,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0.sp,
-                      color: _currentPage == 2 ? MIXIN_47 : MIXIN_BLACK_4,
+                      color: _currentPage == 2 ? MIXIN_47 : B_4,
                     ),
                   ),
                 ),
@@ -175,7 +175,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                         color: const Color(0xFFDAF3F0),
                         boxShadow: const [
                           BoxShadow(
-                            color: MIXIN_POINT_COLOR,
+                            color: P_1,
                             blurRadius: 2.0,
                             offset: Offset(2, 4),
                           )
@@ -191,7 +191,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                               fontFamily: 'SUIT',
                               fontWeight: FontWeight.w600,
                               fontSize: 20.0.sp,
-                              color: MIXIN_POINT_COLOR,
+                              color: P_1,
                             ),
                           ),
                           SizedBox(height: 18.0.h),
@@ -202,7 +202,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                               fontFamily: 'SUIT',
                               fontWeight: FontWeight.w500,
                               fontSize: 14.0.sp,
-                              color: MIXIN_POINT_COLOR,
+                              color: P_1,
                             ),
                           )
                         ],
@@ -230,7 +230,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                               width: 154.w,
                               height: 48.h,
                               decoration: BoxDecoration(
-                                color: MIXIN_2,
+                                color: P_2,
                                 borderRadius: BorderRadius.circular(30.0.r),
                               ),
                               alignment: Alignment.center,
@@ -254,7 +254,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                               width: 110.w,
                               height: 48.h,
                               decoration: BoxDecoration(
-                                color: MIXIN_2,
+                                color: P_2,
                                 borderRadius: BorderRadius.circular(30.0.r),
                               ),
                               alignment: Alignment.center,
@@ -273,7 +273,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                               width: 100.w,
                               height: 48.h,
                               decoration: BoxDecoration(
-                                color: MIXIN_2,
+                                color: P_2,
                                 borderRadius: BorderRadius.circular(30.0.r),
                               ),
                               alignment: Alignment.center,
@@ -315,7 +315,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                         color: const Color(0xFFDAF3F0),
                         boxShadow: const [
                           BoxShadow(
-                            color: MIXIN_POINT_COLOR,
+                            color: P_1,
                             blurRadius: 2.0,
                             offset: Offset(2, 4),
                           )
@@ -331,7 +331,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                               fontFamily: 'SUIT',
                               fontWeight: FontWeight.w600,
                               fontSize: 20.0.sp,
-                              color: MIXIN_POINT_COLOR,
+                              color: P_1,
                             ),
                           ),
                           SizedBox(height: 18.0.h),
@@ -341,7 +341,7 @@ class _BackProfileCardScreenState extends State<BackProfileCardScreen> {
                               fontFamily: 'SUIT',
                               fontWeight: FontWeight.w500,
                               fontSize: 14.0.sp,
-                              color: MIXIN_POINT_COLOR,
+                              color: P_1,
                             ),
                           ),
                         ],

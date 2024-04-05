@@ -1,10 +1,15 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../components/all_category.dart';
+import 'package:mixin_mac_2/layout/nopadding_textbutton.dart';
+import 'package:mixin_mac_2/models/moim_data.dart';
+import 'package:mixin_mac_2/screens/main_screens/main_moim_screens/main_moim_screen.dart';
+import 'package:mixin_mac_2/screens/moim/moim_detail_screens/moim_detail_thunder_screen.dart';
 import '../../../components/moim_card_format.dart';
 import '../../../const/colors.dart';
-import '../../../layout/category_layout_round.dart';
-import '../../../models/moim_card_model.dart';
+import '../../../const/data.dart';
 import '../../moim/moim_detail_screens/moim_detail_screen.dart';
 
 class MainHomeHomeScreen extends StatefulWidget {
@@ -16,192 +21,308 @@ class MainHomeHomeScreen extends StatefulWidget {
 
 class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
   final List<bool> _selectScript = List.filled(3, false);
-  List<String> tagText = ['자격증', '산업기사', '집중'];
-  List<bool> categoryList = List.filled(14, false);
 
+  final String url = 'http://$ip/api/moim?page=0&size=12';
   List<String> selectedOptions = [];
 
-  final List<MoimCardModel> _registeredMoim = [
-    MoimCardModel(
-      title: '제발되라',
-      memberCount: 4,
-      hashTag: ['사랑', '존중', '배려'],
-      dDate: 5,
-      category: Category.classes,
-      type: Type.thunder,
-    ),
-    MoimCardModel(
-      title: '제발되라제발제발',
-      memberCount: 23,
-      hashTag: ['행복', '재미', '격려'],
-      dDate: 7,
-      category: Category.it,
-      type: Type.study,
-    ),
-    MoimCardModel(
-      title: '이게 되면 좀 뭐가 된다',
-      memberCount: 1,
-      hashTag: ['부담', '걱정', '염려'],
-      dDate: 3,
-      category: Category.cook,
-      type: Type.project,
-    ),
-  ];
+  Dio dio = Dio();
+
+  List<MoimData> moimDataList = [];
+  List<MoimData> thunderDataList = [];
+
+  void fetchData() async {
+    String? refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
+
+    // dio 사용
+    try {
+      Options options = Options(
+        headers: {
+          "Authorization": jsonDecode(refreshToken!)[0],
+        },
+        method: 'GET',
+      );
+      print('6--------------------------------------------------');
+
+      final Response resp = await dio.get(
+        url,
+        options: options,
+      );
+      print(resp);
+
+      print('4--------------------------------------------------');
+
+      Map<String, dynamic> data = await resp.data;
+
+      print('data = $data');
+      print('3--------------------------------------------------');
+
+      print('2--------------------------------------------------');
+
+      for (var moimData in data['data']['moimList']) {
+        print(moimData);
+        if (moimData['moimType'] != '번개') {
+          print(moimData['moimType'] != '번개');
+          moimDataList.add(MoimData.fromJson(moimData));
+        } else {
+          thunderDataList.add(MoimData.fromJson(moimData));
+        }
+      }
+      print('1--------------------------------------------------');
+
+      setState(() {});
+    } catch (e) {
+      if (e is DioError) {
+        if (e.response != null) {
+          print('DioError response: ${e.response}');
+        } else {
+          print('DioError error: $e');
+        }
+      } else {
+        print('Unexpected error: $e');
+      }
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchData();
+    print('111111111111111');
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [
-          //배너
-          SizedBox(
-            height: 251.h,
-            child: Stack(
+          Padding(
+            padding: EdgeInsets.only(
+              left: 24.w,
+              top: 20.h,
+              right: 24.w,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 176.h,
-                  color: const Color(0xFF495FE7),
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 24.h),
-                      Text(
-                        '우리들의 놀이터, 믹스인',
-                        style: TextStyle(
-                          fontFamily: 'SUIT',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.0.sp,
-                          color: WHITE,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        '더 잘 활용하는 방법은?',
-                        style: TextStyle(
-                          fontFamily: 'SUIT',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 24.0.sp,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  top: 91.h,
-                  left: 24.w,
-                  child: SizedBox(
-                    width: 342.w,
-                    height: 160.h,
-                    child: Image.asset('assets/images/maskgroup.png'),
-                  ),
+                Image.asset('assets/images/mixin_logo_color.png',width: 89.w, height: 24.h,),
+
+                Row(
+                  children: [
+                    Image.asset('assets/images/icons/search_icon.png', width: 20.68, height: 20.68,),
+                    SizedBox(width: 24.w),
+                    Image.asset('assets/images/black_bell_3x.png', width: 21.8, height: 21.8,),
+                  ],
                 )
+              ],
+            )
+          ),
+          SizedBox(height: 24.h),
+          //배너
+          Container(
+            height: 104.h,
+            margin: EdgeInsets.symmetric(horizontal: 16.w),
+            decoration: BoxDecoration(
+              color: const Color(0xFF495FE7),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
+              children: [
+                SizedBox(width: 24.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '우리들의 놀이터 믹스인',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: WHITE,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      '더 재밌게 하는 방법은?',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        color: WHITE,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ),
+          SizedBox(height: 24.h),
+
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '최근 올라온 밋!',
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w700,
+                        color: B_1,
+                      ),
+                    ),
+                    NoPaddingTextButton(
+                        child: Text(
+                          '더보기>',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                            color: P_1,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => MainMoimScreen()),
+                          );
+                        }),
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                // SizedBox(
+                //   // color: Colors.red,
+                //   height: 291.h,
+                //   child: ListView.builder(
+                //       scrollDirection: Axis.horizontal,
+                //       shrinkWrap: true,
+                //       // physics: const NeverScrollableScrollPhysics(),
+                //       itemCount: moimDataList.length,
+                //       itemBuilder: (context, index) {
+                //         final moimData = moimDataList[index];
+                //         return Row(
+                //           children: [
+                //             MoimCardSmall(
+                //               dDay: moimData.dday,
+                //               totalMember: moimData.totalMember,
+                //               moimType: moimData.moimType,
+                //               backgroundImage: moimData.moimThumbnailUrl,
+                //               categoryImage: moimData.categoryUrl,
+                //               categoryName: moimData.categoryName,
+                //               memberGender: 0,
+                //               currentMember: moimData.currentMember,
+                //               onPressed: () {
+                //                 print(moimData.moimId);
+                //                 Navigator.of(context).push(
+                //                   MaterialPageRoute(
+                //                     builder: (context) => MoimDetailScreen(
+                //                       moimId: moimData.moimId,
+                //                     ),
+                //                   ),
+                //                 );
+                //               },
+                //               iconOnPressed: () {},
+                //               moimName: moimData.moimName,
+                //               tag: moimData.moimTags,
+                //             ),
+                //             SizedBox(width: 12.w),
+                //           ],
+                //         );
+                //       }),
+                // ),
               ],
             ),
           ),
-
-          // 정규모임 카드
-          Padding(
-            padding: EdgeInsets.only(left: 24.w, top: 16.h),
-            child: SingleChildScrollView(
+          Container(
+            height: 239.h,
+            padding: EdgeInsets.only(left: 16.w),
+            child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  MoimCardSmall(
-                    moimType: '스터디',
-                    dDay: 10,
-                    categoryImage: 'assets/images/category_images/class.png',
-                    backgroundImage: 'assets/images/complete_make_moim.png',
-                    categoryName: '수업',
-                    memberGender: 0,
-                    totalMember: 5,
-                    currentMember: 3,
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const MoimDetailScreen()),
-                      );
-                      print('1');
-                    },
-                    iconOnPressed: (){},
-                    heartColor: MIXIN_POINT_COLOR,
-                    moimName: '산업안전 산업기사 자격증 스터디',
-                    tag: tagText,
-                  ),
-                  SizedBox(width: 12.w),
-                  MoimCardSmall(
-                    moimType: '스터디',
-                    dDay: 7,
-                    categoryImage: 'assets/images/category_images/music.png',
-                    backgroundImage: 'assets/images/complete_make_moim.png',
-                    categoryName: '음악',
-                    memberGender: 2,
-                    totalMember: 6,
-                    currentMember: 1,
-                    onPressed: () {},
-                    iconOnPressed: (){},
-                    heartColor: MIXIN_POINT_COLOR,
-                    moimName: '필름감아',
-                    tag: tagText,
-                  ),
-                  SizedBox(width: 12.w),
-                  MoimCardSmall(
-                    moimType: '프로젝트',
-                    dDay: 14,
-                    categoryImage: 'assets/images/category_images/IT.png',
-                    backgroundImage: 'assets/images/complete_make_moim.png',
-                    categoryName: 'IT/개발',
-                    memberGender: 0,
-                    totalMember: 6,
-                    currentMember: 1,
-                    onPressed: () {},
-                    iconOnPressed: (){},
-
-                    heartColor: MIXIN_POINT_COLOR,
-                    moimName: '플러터 개발자 구합니다.',
-                    tag: tagText,
-                  ),
-                  SizedBox(width: 12.w),
-                  MoimCardSmall(
-                    moimType: '스터디',
-                    dDay: 7,
-                    categoryImage: 'assets/images/category_images/music.png',
-                    backgroundImage: 'assets/images/complete_make_moim.png',
-                    categoryName: '음악',
-                    memberGender: 1,
-                    totalMember: 6,
-                    currentMember: 1,
-                    onPressed: () {},
-                    iconOnPressed: (){},
-                    heartColor: MIXIN_POINT_COLOR,
-                    moimName: '필름감아',
-                    tag: tagText,
-                  ),
-                  SizedBox(width: 12.w),
-                  MoimCardSmall(
-                    moimType: '스터디',
-                    dDay: 7,
-                    categoryImage: 'assets/images/category_images/music.png',
-                    backgroundImage: 'assets/images/complete_make_moim.png',
-                    categoryName: '음악',
-                    memberGender: 1,
-                    totalMember: 6,
-                    currentMember: 1,
-                    onPressed: () {},
-                    iconOnPressed: (){},
-                    heartColor: MIXIN_POINT_COLOR,
-                    moimName: '필름감아',
-                    tag: tagText,
-                  ),
-                ],
-              ),
+              shrinkWrap: true,
+              itemCount: 5,
+              itemBuilder: (context, index){
+                return NewMoimCardFormat();
+              },
             ),
           ),
-          const Divider(
-            thickness: 8,
-            color: MIXIN_BLACK_5,
+          Center(child: NewMoimCardFormat()),
+          SizedBox(height: 24.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.h),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '오늘 진행되는 번개',
+                      style: TextStyle(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w700,
+                          color: B_1),
+                    ),
+                    // NoPaddingTextButton(
+                    //     child: Text(
+                    //       '더보기>',
+                    //       style: TextStyle(
+                    //         fontSize: 12.sp,
+                    //         fontWeight: FontWeight.w600,
+                    //         color: MIXIN_POINT_COLOR,
+                    //       ),
+                    //     ),
+                    //     onPressed: () {
+                    //       Navigator.of(context).push(
+                    //         MaterialPageRoute(
+                    //             builder: (context) => MainMoimScreen()),
+                    //       );
+                    //     }),
+                  ],
+                ),
+                SizedBox(height: 16.h),
+                // SizedBox(
+                //   height: 161.h,
+                //   child: ListView.builder(
+                //       scrollDirection: Axis.horizontal,
+                //       shrinkWrap: true,
+                //       // physics: const NeverScrollableScrollPhysics(),
+                //       itemCount: thunderDataList.length,
+                //       itemBuilder: (context, index) {
+                //         final moimData = thunderDataList[index];
+                //         final moimDate =
+                //             moimData.date.substring(5).replaceAll('.', '/');
+                //         return Row(
+                //           children: [
+                //             MoimThunder(
+                //               imageAsset: moimData.categoryUrl,
+                //               moimDate: moimDate,
+                //               moimPlace: moimData.moimPlace,
+                //               totalMember: moimData.totalMember,
+                //               categoryImage: moimData.categoryUrl,
+                //               categoryName: moimData.categoryName,
+                //               memberGender: 0,
+                //               currentMember: moimData.currentMember,
+                //               onPressed: () {
+                //                 print(moimData.moimId);
+                //                 Navigator.of(context).push(
+                //                   MaterialPageRoute(
+                //                     builder: (context) =>
+                //                         MoimDetailThunderScreen(
+                //                       id: moimData.moimId,
+                //                     ),
+                //                   ),
+                //                 );
+                //               },
+                //               moimName: moimData.moimName,
+                //             ),
+                //             SizedBox(width: 12.w),
+                //           ],
+                //         );
+                //       }),
+                // ),
+              ],
+            ),
           ),
           // 활동 추천
           Padding(
@@ -217,7 +338,6 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                     Text(
                       '이 활동(추천)은 어떠세요?',
                       style: TextStyle(
-                        fontFamily: 'SUIT',
                         fontWeight: FontWeight.w700,
                         fontSize: 22.sp,
                       ),
@@ -232,12 +352,12 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                           backgroundColor: Colors.white,
                         ),
                         child: Text(
-                          'All >',
+                          '전체보기>',
                           style: TextStyle(
-                              color: MIXIN_BLACK_4,
-                              fontSize: 14.sp,
-                              fontFamily: 'SUIT',
-                              fontWeight: FontWeight.w500),
+                            color: P_1,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         onPressed: () {},
                       ),
@@ -255,7 +375,7 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                           height: 90.h,
                           width: 90.w,
                           decoration: BoxDecoration(
-                            color: MIXIN_BLACK_5,
+                            color: B_5,
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                         ),
@@ -267,19 +387,17 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                             Text(
                               '안양시청',
                               style: TextStyle(
-                                  fontFamily: 'SUIT',
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12.0.sp,
-                                  color: MIXIN_POINT_COLOR),
+                                  color: P_1),
                             ),
                             SizedBox(height: 4.h),
                             Text(
                               '안양시 캐릭터 콘테스트',
                               style: TextStyle(
-                                  fontFamily: 'SUIT',
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18.sp,
-                                  color: MIXIN_BLACK_1),
+                                  color: B_1),
                             ),
                             SizedBox(height: 12.h),
                             Container(
@@ -287,15 +405,14 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                               height: 28.h,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  color: MIXIN_BLACK_5,
+                                  color: B_5,
                                   borderRadius: BorderRadius.circular(16.r)),
                               child: Text(
                                 '2023.12.01 ~ 2023.12.31',
                                 style: TextStyle(
-                                    fontFamily: 'SUIT',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14.sp,
-                                    color: MIXIN_BLACK_2),
+                                    color: B_2),
                               ),
                             )
                           ],
@@ -303,10 +420,13 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                _selectScript[0] ? Colors.white : MIXIN_BLACK_5,
+                                _selectScript[0] ? P_3 : B_5,
                             fixedSize: Size(16.w, 16.h),
                             shape: const CircleBorder(),
-                            side: BorderSide(width: 2.w, color: MIXIN_BLACK_5),
+                            side: BorderSide(
+                                width: 2.w,
+                                color:
+                                    _selectScript[0] ? P_3 : B_5),
                             elevation: 0,
                           ),
                           onPressed: () {
@@ -319,8 +439,8 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                             width: 14.w,
                             height: 20.h,
                             color: _selectScript[0]
-                                ? MIXIN_POINT_COLOR
-                                : MIXIN_BLACK_4,
+                                ? P_1
+                                : B_4,
                           ),
                         ),
                       ],
@@ -333,7 +453,7 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                           height: 90.h,
                           width: 90.w,
                           decoration: BoxDecoration(
-                            color: MIXIN_BLACK_5,
+                            color: B_5,
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                         ),
@@ -345,19 +465,17 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                             Text(
                               '미분당',
                               style: TextStyle(
-                                  fontFamily: 'SUIT',
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12.0.sp,
-                                  color: MIXIN_POINT_COLOR),
+                                  color: P_1),
                             ),
                             SizedBox(height: 4.h),
                             Text(
                               '미분당 로고 리뉴얼',
                               style: TextStyle(
-                                  fontFamily: 'SUIT',
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18.sp,
-                                  color: MIXIN_BLACK_1),
+                                  color: B_1),
                             ),
                             SizedBox(height: 12.h),
                             Container(
@@ -365,16 +483,15 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                               height: 28.h,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: MIXIN_BLACK_5,
+                                color: B_5,
                                 borderRadius: BorderRadius.circular(16.r),
                               ),
                               child: Text(
                                 '2023.12.01 ~ 2023.12.31',
                                 style: TextStyle(
-                                    fontFamily: 'SUIT',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14.sp,
-                                    color: MIXIN_BLACK_2),
+                                    color: B_2),
                               ),
                             )
                           ],
@@ -382,10 +499,10 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                _selectScript[1] ? Colors.white : MIXIN_BLACK_5,
+                                _selectScript[1] ? Colors.white : B_5,
                             fixedSize: Size(16.w, 16.h),
                             shape: const CircleBorder(),
-                            side: BorderSide(width: 2.w, color: MIXIN_BLACK_5),
+                            side: BorderSide(width: 2.w, color: B_5),
                             elevation: 0,
                           ),
                           onPressed: () {
@@ -398,8 +515,8 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                             width: 14.w,
                             height: 20.h,
                             color: _selectScript[1]
-                                ? MIXIN_POINT_COLOR
-                                : MIXIN_BLACK_4,
+                                ? P_1
+                                : B_4,
                           ),
                         ),
                       ],
@@ -412,7 +529,7 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                           height: 90.h,
                           width: 90.w,
                           decoration: BoxDecoration(
-                            color: MIXIN_BLACK_5,
+                            color: B_5,
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                         ),
@@ -424,19 +541,17 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                             Text(
                               '이마트24',
                               style: TextStyle(
-                                  fontFamily: 'SUIT',
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12.0.sp,
-                                  color: MIXIN_POINT_COLOR),
+                                  color: P_1),
                             ),
                             SizedBox(height: 4.h),
                             Text(
                               '신메뉴 네이밍 콘테스트',
                               style: TextStyle(
-                                  fontFamily: 'SUIT',
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18.sp,
-                                  color: MIXIN_BLACK_1),
+                                  color: B_1),
                             ),
                             SizedBox(height: 12.h),
                             Container(
@@ -444,16 +559,15 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                               height: 28.h,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: MIXIN_BLACK_5,
+                                color: B_5,
                                 borderRadius: BorderRadius.circular(16.r),
                               ),
                               child: Text(
                                 '2023.12.01 ~ 2023.12.31',
                                 style: TextStyle(
-                                    fontFamily: 'SUIT',
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14.sp,
-                                    color: MIXIN_BLACK_2),
+                                    color: B_2),
                               ),
                             )
                           ],
@@ -461,10 +575,10 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                _selectScript[2] ? Colors.white : MIXIN_BLACK_5,
+                                _selectScript[2] ? Colors.white : B_5,
                             fixedSize: Size(16.w, 16.h),
                             shape: const CircleBorder(),
-                            side: BorderSide(width: 2.w, color: MIXIN_BLACK_5),
+                            side: BorderSide(width: 2.w, color: B_5),
                             elevation: 0,
                           ),
                           onPressed: () {
@@ -477,8 +591,8 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
                             width: 14.w,
                             height: 20.h,
                             color: _selectScript[2]
-                                ? MIXIN_POINT_COLOR
-                                : MIXIN_BLACK_4,
+                                ? P_1
+                                : B_4,
                           ),
                         ),
                       ],
@@ -490,7 +604,7 @@ class _MainHomeHomeScreenState extends State<MainHomeHomeScreen> {
           ),
           const Divider(
             thickness: 8,
-            color: MIXIN_BLACK_5,
+            color: B_5,
           ),
         ],
       ),

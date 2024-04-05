@@ -19,10 +19,9 @@ class MakeMoim4 extends StatelessWidget {
               Text(
                 '모임이 완성되었습니다!',
                 style: TextStyle(
-                  fontFamily: 'SUIT',
                   fontWeight: FontWeight.w600,
                   fontSize: 24.sp,
-                  color: MIXIN_BLACK_1,
+                  color: B_1,
                 ),
               ),
               SizedBox(height: 45.h),
@@ -32,59 +31,32 @@ class MakeMoim4 extends StatelessWidget {
                 height: 299.h,
               ),
               SizedBox(height: 183.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 165.w,
-                    height: 56.h,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          backgroundColor: MIXIN_POINT_COLOR,
-                          elevation: 0),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const MainBottomNavigationBar(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        '완료하기',
-                        style: TextStyle(
-                          fontFamily: 'SUIT',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18.sp,
-                        ),
+              SizedBox(
+                width: 165.w,
+                height: 56.h,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
+                      backgroundColor: P_1,
+                      elevation: 0),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const MainBottomNavigationBar(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    '완료하기',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.sp,
                     ),
                   ),
-                  SizedBox(
-                    width: 165.w,
-                    height: 56.h,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          backgroundColor: MIXIN_BLACK_4,
-                          elevation: 0),
-                      onPressed: () {},
-                      child: Text(
-                        '공유하기',
-                        style: TextStyle(
-                          fontFamily: 'SUIT',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18.sp,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                ),
               )
             ],
           ),

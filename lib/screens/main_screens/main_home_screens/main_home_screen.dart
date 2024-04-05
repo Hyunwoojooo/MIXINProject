@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mixin_mac_2/const/data.dart';
-import 'package:mixin_mac_2/screens/make_regular_meeting.dart';
+import 'package:mixin_mac_2/screens/moim/make_regular_meeting.dart';
 import '../../../const/colors.dart';
 import 'main_home_home_screen.dart';
-import 'main_home_moim_screen.dart';
+import '../main_profile_screens/main_home_moim_screen.dart';
 
 class MainHomeScreen extends StatefulWidget {
   const MainHomeScreen({Key? key}) : super(key: key);
@@ -73,7 +73,7 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                       height: 36.h,
                       child: TabBar(
                         labelColor: WHITE,
-                        unselectedLabelColor: MIXIN_BLACK_1,
+                        unselectedLabelColor: B_1,
                         labelStyle: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
@@ -98,12 +98,8 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                             child: Image.asset(
                                 'assets/images/point_color_dot.png')),
                         IconButton(
-                          onPressed: (){
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const MakeRegularMeeting(),
-                              ),
-                            );
+                          onPressed: () {
+
                           },
                           icon: Image.asset(
                             'assets/images/black_bell_3x.png',

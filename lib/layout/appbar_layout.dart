@@ -11,11 +11,11 @@ class AppbarLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 18.h),
+      padding: EdgeInsets.only(top: 25.h),
       child: GestureDetector(
         onTap: onPressed,
         child: Image.asset(
-          'assets/images/icons/new_back_black_icon.png',
+          'assets/images/icons/back.png',
           height: 26.h,
         ),
       ),
@@ -26,29 +26,31 @@ class AppbarLayout extends StatelessWidget {
 class AppbarIconTextLayout extends StatelessWidget {
   void Function() onPressed;
   String text;
-  AppbarIconTextLayout({required this.onPressed, required this.text, super.key});
+  double width;
+  AppbarIconTextLayout({required this.onPressed, required this.text, required this.width, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 18.h),
+      padding: EdgeInsets.only(top: 25.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
             onTap: onPressed,
             child: Image.asset(
-              'assets/images/icons/new_back_black_icon.png',
+              'assets/images/icons/back.png',
               height: 26.h,
+              width: 26.w,
             ),
           ),
-          SizedBox(width: 16.w),
+          SizedBox(width: width.w),
           Text(
             text,
             style: TextStyle(
               fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
-              color: MIXIN_BLACK_1,
+              fontWeight: FontWeight.w600,
+              color: B_1,
             ),
           ),
         ],
@@ -67,7 +69,7 @@ class AppbarCloseLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 33.h),
+        SizedBox(height: 25.h),
         IconButton(
           padding: EdgeInsets.zero,
           onPressed: onPressed,
@@ -98,7 +100,7 @@ class AppbarTextLayout extends StatelessWidget {
           style: TextStyle(
             fontSize: 28.sp,
             fontWeight: FontWeight.w700,
-            color: MIXIN_BLACK_1,
+            color: B_1,
           ),
         ),
       ],

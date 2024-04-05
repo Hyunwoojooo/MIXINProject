@@ -10,7 +10,7 @@ class CategoryLayoutChip extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
       decoration: BoxDecoration(
-        color: MIXIN_,
+        color: P_3,
         borderRadius: BorderRadius.circular(14.5.r),
       ),
       child: Row(
@@ -22,7 +22,7 @@ class CategoryLayoutChip extends StatelessWidget {
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
-              color: MIXIN_POINT_COLOR,
+              color: P_1,
             ),
           ),
         ],

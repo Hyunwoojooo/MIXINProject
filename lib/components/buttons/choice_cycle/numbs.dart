@@ -20,7 +20,7 @@ class Numbs extends StatelessWidget {
             fontSize: 24.sp,
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w600,
-            color: MIXIN_BLACK_1,
+            color: B_1,
           ),
         ),
       ),

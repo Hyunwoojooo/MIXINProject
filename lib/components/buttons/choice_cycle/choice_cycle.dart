@@ -90,9 +90,8 @@ class _ChoiceCycleState extends State<ChoiceCycle> {
               '회',
               style: TextStyle(
                 fontSize: 24.sp,
-                fontFamily: 'SUIT',
                 fontWeight: FontWeight.w600,
-                color: MIXIN_BLACK_2,
+                color: B_2,
               ),
             ),
           ],

@@ -23,7 +23,7 @@ class _AllCategoryState extends State<AllCategory> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomFloatingActionButton(
         text: '다음',
-        fillColor: MIXIN_POINT_COLOR,
+        fillColor: P_1,
         onPressed: () async {
           Navigator.of(context).pop();
           // Navigator.of(context).push(
@@ -44,7 +44,7 @@ class _AllCategoryState extends State<AllCategory> {
               height: 36.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18.0.r),
-                color: MIXIN_BLACK_5,
+                color: B_5,
               ),
               child: Center(
                 child: Text(
@@ -63,7 +63,7 @@ class _AllCategoryState extends State<AllCategory> {
               children: [
                 CategoryLayoutRound(
                   borderSideColor:
-                      categoryList[0] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                      categoryList[0] == true ? P_2 : B_5,
                   onPressed: () {
                     setState(() {
                       categoryList[0] = !categoryList[0];
@@ -76,8 +76,8 @@ class _AllCategoryState extends State<AllCategory> {
                     print(selectedOptions);
                   },
                   mainSizedBoxWidth: 105.w,
-                  backgroundColor: categoryList[0] == true ? MIXIN_ : WHITE,
-                  containerColor: categoryList[0] == true ? MIXIN_ : WHITE,
+                  backgroundColor: categoryList[0] == true ? P_3 : WHITE,
+                  containerColor: categoryList[0] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/IT.png',
                   text: 'IT/개발',
                 ),
@@ -85,8 +85,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 99.w,
                   borderSideColor:
-                      categoryList[1] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[1] == true ? MIXIN_ : WHITE,
+                      categoryList[1] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[1] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[1] = !categoryList[1];
@@ -98,7 +98,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[1] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[1] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/design.png',
                   text: '디자인',
                 ),
@@ -106,8 +106,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 111.w,
                   borderSideColor:
-                      categoryList[2] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[2] == true ? MIXIN_ : WHITE,
+                      categoryList[2] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[2] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[2] = !categoryList[2];
@@ -119,7 +119,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[2] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[2] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/culture.png',
                   text: '문화활동',
                 ),
@@ -131,8 +131,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[3] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[3] == true ? MIXIN_ : WHITE,
+                      categoryList[3] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[3] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[3] = !categoryList[3];
@@ -144,7 +144,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[3] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[3] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/music.png',
                   text: '음악',
                 ),
@@ -152,8 +152,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[4] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[4] == true ? MIXIN_ : WHITE,
+                      categoryList[4] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[4] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[4] = !categoryList[4];
@@ -165,7 +165,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[4] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[4] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/trip.png',
                   text: '여행',
                 ),
@@ -173,8 +173,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 111.w,
                   borderSideColor:
-                      categoryList[5] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[5] == true ? MIXIN_ : WHITE,
+                      categoryList[5] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[5] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[5] = !categoryList[5];
@@ -186,7 +186,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[5] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[5] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/bongsa.png',
                   text: '봉사활동',
                 ),
@@ -198,8 +198,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[6] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[6] == true ? MIXIN_ : WHITE,
+                      categoryList[6] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[6] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[6] = !categoryList[6];
@@ -211,7 +211,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[6] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[6] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/health.png',
                   text: '운동',
                 ),
@@ -219,8 +219,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 111.w,
                   borderSideColor:
-                      categoryList[7] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[7] == true ? MIXIN_ : WHITE,
+                      categoryList[7] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[7] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[7] = !categoryList[7];
@@ -232,7 +232,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[7] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[7] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/animal.png',
                   text: '반려동물',
                 ),
@@ -240,8 +240,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[8] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[8] == true ? MIXIN_ : WHITE,
+                      categoryList[8] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[8] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[8] = !categoryList[8];
@@ -253,7 +253,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[8] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[8] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/sagyo.png',
                   text: '사교',
                 ),
@@ -266,8 +266,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[9] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[9] == true ? MIXIN_ : WHITE,
+                      categoryList[9] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[9] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[9] = !categoryList[9];
@@ -279,7 +279,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[9] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[9] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/class.png',
                   text: '수업',
                 ),
@@ -287,8 +287,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 99.w,
                   borderSideColor:
-                      categoryList[10] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[10] == true ? MIXIN_ : WHITE,
+                      categoryList[10] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[10] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[10] = !categoryList[10];
@@ -300,7 +300,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[10] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[10] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/class.png',
                   text: '외국어',
                 ),
@@ -308,8 +308,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[11] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[11] == true ? MIXIN_ : WHITE,
+                      categoryList[11] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[11] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[11] = !categoryList[11];
@@ -321,7 +321,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[11] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[11] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/restuarant.png',
                   text: '맛집',
                 ),
@@ -334,8 +334,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[12] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[12] == true ? MIXIN_ : WHITE,
+                      categoryList[12] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[12] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[12] = !categoryList[12];
@@ -347,7 +347,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[12] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[12] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/cook.png',
                   text: '요리',
                 ),
@@ -355,8 +355,8 @@ class _AllCategoryState extends State<AllCategory> {
                 CategoryLayoutRound(
                   mainSizedBoxWidth: 87.w,
                   borderSideColor:
-                      categoryList[13] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                  backgroundColor: categoryList[13] == true ? MIXIN_ : WHITE,
+                      categoryList[13] == true ? P_2 : B_5,
+                  backgroundColor: categoryList[13] == true ? P_3 : WHITE,
                   onPressed: () {
                     setState(() {
                       categoryList[13] = !categoryList[13];
@@ -368,7 +368,7 @@ class _AllCategoryState extends State<AllCategory> {
                     });
                     print(selectedOptions);
                   },
-                  containerColor: categoryList[13] == true ? MIXIN_ : WHITE,
+                  containerColor: categoryList[13] == true ? P_3 : WHITE,
                   imageAsset: 'assets/images/category_images/finance.png',
                   text: '금융',
                 ),

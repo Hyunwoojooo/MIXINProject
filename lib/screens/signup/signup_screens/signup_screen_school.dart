@@ -116,7 +116,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
-                    side: BorderSide(width: 1.5.w, color: MIXIN_BLACK_5),
+                    side: BorderSide(width: 1.5.w, color: B_5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0.r),
                     ),
@@ -130,8 +130,8 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                       userUniversity.isEmpty ? '대학교를 선택해주세요' : userUniversity,
                       style: TextStyle(
                         color: userUniversity.isEmpty
-                            ? MIXIN_BLACK_4
-                            : MIXIN_BLACK_1,
+                            ? B_4
+                            : B_1,
                         fontSize: 16.sp,
                         fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
@@ -166,7 +166,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                       fontFamily: 'SUIT',
                                       fontWeight: FontWeight.w600,
                                       fontSize: 24.0.sp,
-                                      color: MIXIN_BLACK_1,
+                                      color: B_1,
                                     ),
                                   ),
                                   IconButton(
@@ -180,7 +180,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                     icon: Image.asset(
                                       'assets/images/icons/close_icon_black_3x.png',
                                       width: 26.w,
-                                      color: MIXIN_BLACK_1,
+                                      color: B_1,
                                     ),
                                   ),
                                 ],
@@ -208,7 +208,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                               },
                                               icon: Image.asset(
                                                 'assets/images/icon_search.png',
-                                                color: MIXIN_POINT_COLOR,
+                                                color: P_1,
                                               ),
                                             ),
                                           ),
@@ -217,18 +217,18 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                               horizontal: 12.0.w),
                                           hintText: '학교검색',
                                           hintStyle: TextStyle(
-                                            color: MIXIN_BLACK_4,
+                                            color: B_4,
                                             fontSize: 16.sp,
                                             fontFamily: 'SUIT',
                                             fontWeight: FontWeight.w500,
                                           ),
-                                          fillColor: MIXIN_BLACK_5,
+                                          fillColor: B_5,
                                           filled: true,
                                           border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8.0.r),
                                             borderSide: const BorderSide(
-                                              color: MIXIN_BLACK_4,
+                                              color: B_4,
                                               width: 1,
                                             ),
                                           ),
@@ -236,7 +236,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                             borderRadius:
                                                 BorderRadius.circular(8.0.r),
                                             borderSide: BorderSide(
-                                              color: MIXIN_BLACK_4,
+                                              color: B_4,
                                               width: 1.w,
                                             ),
                                           ),
@@ -290,7 +290,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                                   fontFamily: 'SUIT',
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 16.sp,
-                                                  color: MIXIN_BLACK_1),
+                                                  color: B_1),
                                             ),
                                             subtitle: Text(
                                               schoolAddress[index].isEmpty
@@ -300,7 +300,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                                 fontFamily: 'SUIT',
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12.sp,
-                                                color: MIXIN_BLACK_3,
+                                                color: B_3,
                                               ),
                                             ),
                                             trailing: SizedBox(
@@ -309,7 +309,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor:
-                                                        MIXIN_POINT_COLOR,
+                                                        P_1,
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -358,7 +358,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
-                    side: BorderSide(width: 1.5.w, color: MIXIN_BLACK_5),
+                    side: BorderSide(width: 1.5.w, color: B_5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0.r),
                     ),
@@ -389,7 +389,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                       fontFamily: 'SUIT',
                                       fontWeight: FontWeight.w600,
                                       fontSize: 24.0.sp,
-                                      color: MIXIN_BLACK_1,
+                                      color: B_1,
                                     ),
                                   ),
                                   IconButton(
@@ -404,7 +404,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                     icon: Image.asset(
                                       'assets/images/icons/close_icon_black_3x.png',
                                       width: 26.w,
-                                      color: MIXIN_BLACK_1,
+                                      color: B_1,
                                     ),
                                   ),
                                 ],
@@ -430,18 +430,18 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                             vertical: 0.0, horizontal: 12.0.w),
                                         hintText: '학과검색',
                                         hintStyle: TextStyle(
-                                          color: MIXIN_BLACK_4,
+                                          color: B_4,
                                           fontSize: 16.sp,
                                           fontFamily: 'SUIT',
                                           fontWeight: FontWeight.w500,
                                         ),
-                                        fillColor: MIXIN_BLACK_5,
+                                        fillColor: B_5,
                                         filled: true,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8.0.r),
                                           borderSide: const BorderSide(
-                                            color: MIXIN_BLACK_4,
+                                            color: B_4,
                                             width: 1,
                                           ),
                                         ),
@@ -449,7 +449,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                           borderRadius:
                                               BorderRadius.circular(8.0.r),
                                           borderSide: const BorderSide(
-                                            color: MIXIN_BLACK_4,
+                                            color: B_4,
                                             width: 1,
                                           ),
                                         ),
@@ -525,7 +525,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                                   fontFamily: 'SUIT',
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 16.sp,
-                                                  color: MIXIN_BLACK_1),
+                                                  color: B_1),
                                             ),
                                             subtitle: Text(
                                               collegeNames[index].isEmpty
@@ -535,7 +535,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                                 fontFamily: 'SUIT',
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12.sp,
-                                                color: MIXIN_BLACK_3,
+                                                color: B_3,
                                               ),
                                             ),
                                             trailing: SizedBox(
@@ -544,7 +544,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                               child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor:
-                                                        MIXIN_POINT_COLOR,
+                                                        P_1,
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -595,8 +595,8 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                       userDepartment.isEmpty ? '학과를 선택해주세요' : userDepartment,
                       style: TextStyle(
                         color: userDepartment.isEmpty
-                            ? MIXIN_BLACK_4
-                            : MIXIN_BLACK_1,
+                            ? B_4
+                            : B_1,
                         fontSize: 16.sp,
                         fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
@@ -608,7 +608,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                 Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: MIXIN_POINT_COLOR,
+                      backgroundColor: P_1,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0.r),
                       ),

@@ -133,7 +133,7 @@ class _SignUpScreenEmailState extends State<SignUpScreenEmail> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0.r),
                           border: Border.all(
-                            color: MIXIN_BLACK_5,
+                            color: B_5,
                             width: 1.5.w,
                           ),
                           color: Colors.transparent,
@@ -174,7 +174,7 @@ class _SignUpScreenEmailState extends State<SignUpScreenEmail> {
                                       horizontal: 20.w, vertical: 20.h),
                                   hintText: '인증번호 입력',
                                   hintStyle: TextStyle(
-                                    color: MIXIN_BLACK_4,
+                                    color: B_4,
                                     fontSize: 16.0.sp,
                                     fontFamily: 'SUIT',
                                     fontWeight: FontWeight.w500,
@@ -209,7 +209,7 @@ class _SignUpScreenEmailState extends State<SignUpScreenEmail> {
                                 fontFamily: 'SUIT',
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14.0.sp,
-                                color: MIXIN_POINT_COLOR,
+                                color: P_1,
                               ),
                             ),
                             SizedBox(width: 8.w),
@@ -230,7 +230,7 @@ class _SignUpScreenEmailState extends State<SignUpScreenEmail> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               color: isCheckCode == 1
-                                  ? MIXIN_POINT_COLOR
+                                  ? P_1
                                   : Colors.red,
                             ),
                           ),
@@ -240,8 +240,8 @@ class _SignUpScreenEmailState extends State<SignUpScreenEmail> {
                                   horizontal: 14.w, vertical: 8.h),
                               backgroundColor:
                                   _userEmailTextEditController.text.isNotEmpty
-                                      ? MIXIN_POINT_COLOR
-                                      : MIXIN_BLACK_4,
+                                      ? P_1
+                                      : B_4,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0.r)),
                               elevation: 0.0),
@@ -288,8 +288,8 @@ class _SignUpScreenEmailState extends State<SignUpScreenEmail> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: isCheckCode == 1
-                            ? MIXIN_POINT_COLOR
-                            : MIXIN_BLACK_4,
+                            ? P_1
+                            : B_4,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0.r)),
                         elevation: 0.0),

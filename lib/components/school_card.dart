@@ -35,7 +35,7 @@ class SchoolCard extends StatelessWidget {
                     fontFamily: 'SUIT',
                     fontWeight: FontWeight.w500,
                     fontSize: 16.sp,
-                    color: MIXIN_BLACK_1,
+                    color: B_1,
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -45,7 +45,7 @@ class SchoolCard extends StatelessWidget {
                     fontFamily: 'SUIT',
                     fontWeight: FontWeight.w500,
                     fontSize: 12.0.sp,
-                    color: MIXIN_BLACK_3,
+                    color: B_3,
                   ),
                 )
               ],
@@ -53,7 +53,7 @@ class SchoolCard extends StatelessWidget {
             ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                  backgroundColor: MIXIN_POINT_COLOR,
+                  backgroundColor: P_1,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0.r),
                   ),

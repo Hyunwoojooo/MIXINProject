@@ -21,25 +21,31 @@ bool _isPressed4 = false;
 
 class _CategoryButtonState extends State<CategoryButton> {
   String _moim = "모임종류";
-  final _grey = MIXIN_BLACK_5; //MIXIN_BLACK_5의 색이 잘 안보여서 임시대체
+  final _grey = B_5; //MIXIN_BLACK_5의 색이 잘 안보여서 임시대체
+  String moimType = '';
 
   List<String> selectCategory = [
     '카테고리',
     'assets/images/category_images/none_space.png'
   ];
 
+  late SharedPreferences prefs;
 
-  void _saveData(String key, String value) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, value);
+  void _saveData(String key, String value) async {
+    prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, value);
+
+    // moimType = prefs.getString('moimType')!;
   }
 
+  void _setData() async {
+    prefs = await SharedPreferences.getInstance();
+
+    moimType = await prefs.getString('moimType')!;
+  }
 
   @override
   Widget build(BuildContext context) {
-    Color moimcolor = _isPressed1 ? MIXIN_2 : MIXIN_BLACK_4;
-    Color categorycolor = _isPressed2 ? MIXIN_2 : MIXIN_BLACK_4;
-
     void categoryOnpressed(int index, String text) {
       categoryList.fillRange(0, categoryList.length, false);
       categoryList[index] = true;
@@ -62,7 +68,7 @@ class _CategoryButtonState extends State<CategoryButton> {
               borderType: BorderType.RRect,
               radius: Radius.circular(18.r),
               padding: EdgeInsets.zero,
-              color: _moim != '모임종류' ? MIXIN_ : MIXIN_BLACK_4,
+              color: _moim != '모임종류' ? P_3 : B_4,
               child: SizedBox(
                 height: 36.h,
                 width: 80.w,
@@ -73,7 +79,6 @@ class _CategoryButtonState extends State<CategoryButton> {
                       _isPressed2 = false;
                       _isPressed3 = false;
                     });
-                    _saveData('moimType', _moim);
                     print('_isPressed1 : $_isPressed1');
                     print('_isPressed2 : $_isPressed2');
                     print('_isPressed3 : $_isPressed3');
@@ -82,9 +87,9 @@ class _CategoryButtonState extends State<CategoryButton> {
                   },
                   style: ElevatedButton.styleFrom(
                     side: BorderSide(
-                      color: _moim != '모임종류' ? MIXIN_ : Colors.transparent,
+                      color: _moim != '모임종류' ? P_3 : Colors.transparent,
                     ),
-                    backgroundColor: _moim != '모임종류' ? MIXIN_ : WHITE,
+                    backgroundColor: _moim != '모임종류' ? P_3 : WHITE,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.r),
@@ -96,8 +101,7 @@ class _CategoryButtonState extends State<CategoryButton> {
                     style: TextStyle(
                       fontSize: 14.sp,
                       color:
-                          _moim != '모임종류' ? MIXIN_POINT_COLOR : MIXIN_BLACK_4,
-                      fontFamily: 'SUIT',
+                          _moim != '모임종류' ? P_1 : B_4,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -111,7 +115,7 @@ class _CategoryButtonState extends State<CategoryButton> {
               padding: EdgeInsets.zero,
               color: selectCategory[0] != '카테고리'
                   ? Colors.transparent
-                  : MIXIN_BLACK_4,
+                  : B_4,
               child: SizedBox(
                 height: 36.h,
                 child: ElevatedButton(
@@ -136,7 +140,7 @@ class _CategoryButtonState extends State<CategoryButton> {
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
                         color: selectCategory[0] != '카테고리'
-                            ? MIXIN_BLACK_4
+                            ? B_4
                             : Colors.transparent,
                         width: 1.0.w,
                       ),
@@ -161,9 +165,8 @@ class _CategoryButtonState extends State<CategoryButton> {
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: selectCategory[0] != '카테고리'
-                                ? MIXIN_BLACK_2
-                                : MIXIN_BLACK_4,
-                            fontFamily: 'SUIT',
+                                ? B_2
+                                : B_4,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -191,7 +194,12 @@ class _CategoryButtonState extends State<CategoryButton> {
                         }
                         _isPressed3 = true;
                         _moim = "동아리";
+                        _saveData('moimType', _moim);
+                        _setData();
                       });
+                      print('Real moimType : $moimType');
+
+                      print('moimType : $_moim');
                     },
                     text: '동아리',
                   ),
@@ -206,7 +214,11 @@ class _CategoryButtonState extends State<CategoryButton> {
                         }
                         _isPressed3 = true;
                         _moim = "번개";
+                        _saveData('moimType', _moim);
+                        _setData();
                       });
+                      print('Real moimType : $moimType');
+                      print('moimType : $_moim');
                     },
                     text: '번개',
                   ),
@@ -221,7 +233,12 @@ class _CategoryButtonState extends State<CategoryButton> {
                         }
                         _isPressed3 = true;
                         _moim = "스터디";
+                        _saveData('moimType', _moim);
+                        _setData();
                       });
+                      print('Real moimType : $moimType');
+
+                      print('moimType : $_moim');
                     },
                     text: '스터디',
                   ),
@@ -236,7 +253,12 @@ class _CategoryButtonState extends State<CategoryButton> {
                         }
                         _isPressed3 = true;
                         _moim = "프로젝트";
+                        _saveData('moimType', _moim);
+                        _setData();
                       });
+                      print('Real moimType : $moimType');
+
+                      print('moimType : $_moim');
                     },
                     text: '프로젝트',
                   ),
@@ -499,7 +521,7 @@ class _CategoryButtonState extends State<CategoryButton> {
               const Divider(
                 thickness: 1,
                 height: 1,
-                color: MIXIN_BLACK_5,
+                color: B_5,
               ),
             ],
           ),
@@ -513,6 +535,7 @@ class _TextButton extends StatelessWidget {
 
   void Function() onPressed;
   String text = '';
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -520,10 +543,10 @@ class _TextButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            fontSize: 14.sp,
-            color: MIXIN_2,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'SUIT'),
+          fontSize: 14.sp,
+          color: P_2,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
@@ -543,6 +566,7 @@ class RemakeCategoryLayout extends StatefulWidget {
   String text;
   double mainSizedBoxWidth;
   void Function() onPressed;
+
   @override
   State<RemakeCategoryLayout> createState() => _RemakeCategoryLayoutState();
 }
@@ -553,10 +577,10 @@ class _RemakeCategoryLayoutState extends State<RemakeCategoryLayout> {
     return CategoryLayoutRound(
       mainSizedBoxWidth: widget.mainSizedBoxWidth,
       borderSideColor:
-          categoryList[widget.index] == true ? MIXIN_2 : MIXIN_BLACK_5,
-      backgroundColor: categoryList[widget.index] == true ? MIXIN_ : WHITE,
+          categoryList[widget.index] == true ? P_2 : B_5,
+      backgroundColor: categoryList[widget.index] == true ? P_3 : WHITE,
       onPressed: widget.onPressed,
-      containerColor: categoryList[widget.index] == true ? MIXIN_ : WHITE,
+      containerColor: categoryList[widget.index] == true ? P_3 : WHITE,
       imageAsset: widget.imageAsset,
       text: widget.text,
     );

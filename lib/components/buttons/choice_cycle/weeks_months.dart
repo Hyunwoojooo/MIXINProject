@@ -20,7 +20,7 @@ class WeeksMonths extends StatelessWidget {
             fontSize: 18.sp,
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w600,
-            color: MIXIN_BLACK_2,
+            color: B_2,
           ),
         ),
       ),

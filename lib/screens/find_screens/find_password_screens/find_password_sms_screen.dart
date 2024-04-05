@@ -99,10 +99,9 @@ class _FindPasswordSnsScreenState extends State<FindPasswordSnsScreen> {
                     Text(
                       '비밀번호 찾기',
                       style: TextStyle(
-                        fontFamily: 'SUIT',
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
-                        color: MIXIN_BLACK_1,
+                        color: B_1,
                       ),
                     )
                   ],
@@ -129,17 +128,16 @@ class _FindPasswordSnsScreenState extends State<FindPasswordSnsScreen> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                     decoration: BoxDecoration(
-                      color: MIXIN_BLACK_5,
+                      color: B_5,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(18.r),
                     ),
                     child: Text(
                       '비밀번호 재설정 코드를 받으실 방법을 선택해주세요',
                       style: TextStyle(
-                        fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
-                        color: MIXIN_POINT_COLOR,
+                        color: P_1,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -154,10 +152,10 @@ class _FindPasswordSnsScreenState extends State<FindPasswordSnsScreen> {
                       top: 15.h,
                       bottom: 15.h,
                     ),
-                    backgroundColor: MIXIN_,
+                    backgroundColor: P_3,
                     side: BorderSide(
                       width: 1.5.w,
-                      color: MIXIN_2,
+                      color: P_2,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.r),
@@ -173,12 +171,11 @@ class _FindPasswordSnsScreenState extends State<FindPasswordSnsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'SNS로 코드 받기',
+                            '메시지로 코드 받기',
                             style: TextStyle(
                               fontSize: 16.sp,
-                              fontFamily: 'SUIT',
                               fontWeight: FontWeight.w600,
-                              color: MIXIN_BLACK_1,
+                              color: B_1,
                             ),
                           ),
                           SizedBox(height: 6.h),
@@ -186,9 +183,8 @@ class _FindPasswordSnsScreenState extends State<FindPasswordSnsScreen> {
                             '010 3342 8798',
                             style: TextStyle(
                               fontSize: 12.sp,
-                              fontFamily: 'SUIT',
                               fontWeight: FontWeight.w500,
-                              color: MIXIN_BLACK_3,
+                              color: B_3,
                             ),
                           ),
                         ],
@@ -206,8 +202,8 @@ class _FindPasswordSnsScreenState extends State<FindPasswordSnsScreen> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: userCertificationNumber.length == 6
-                            ? MIXIN_POINT_COLOR
-                            : MIXIN_BLACK_4,
+                            ? P_1
+                            : B_4,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
                         elevation: 0.0),
@@ -230,7 +226,6 @@ class _FindPasswordSnsScreenState extends State<FindPasswordSnsScreen> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.sp,
-                            fontFamily: 'SUIT',
                             fontWeight: FontWeight.w600,
                           ),
                         ),

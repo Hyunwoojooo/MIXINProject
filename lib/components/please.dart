@@ -85,7 +85,7 @@ class _PleaseState extends State<Please> {
                     height: 36.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.0.r),
-                      color: MIXIN_BLACK_5,
+                      color: B_5,
                     ),
                     child: Text(
                       '나중에 작성해주셔도 괜찮아요!',
@@ -93,7 +93,7 @@ class _PleaseState extends State<Please> {
                         fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
                         fontSize: 14.0.sp,
-                        color: MIXIN_POINT_COLOR,
+                        color: P_1,
                       ),
                     ),
                   ),
@@ -112,7 +112,7 @@ class _PleaseState extends State<Please> {
                           height: 87.h,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: MIXIN_BLACK_5,
+                            color: B_5,
                             boxShadow: [
                               BoxShadow(color: Colors.grey, blurRadius: 1.0)
                             ],
@@ -150,7 +150,7 @@ class _PleaseState extends State<Please> {
                         fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
                         fontSize: 12.sp,
-                        color: MIXIN_BLACK_4,
+                        color: B_4,
                       ),
                     ),
                   ),
@@ -179,7 +179,7 @@ class _PleaseState extends State<Please> {
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w500,
                       fontSize: 12.sp,
-                      color: MIXIN_BLACK_4,
+                      color: B_4,
                     ),
                   ),
                 ),
@@ -188,7 +188,7 @@ class _PleaseState extends State<Please> {
                 Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: MIXIN_POINT_COLOR,
+                        backgroundColor: P_1,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0.r)),
                         elevation: 0.0),
@@ -341,7 +341,7 @@ class _PleaseState extends State<Please> {
       height: 90.h,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: MIXIN_BLACK_5,
+        color: B_5,
         boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 1.0)],
       ),
       child: Center(

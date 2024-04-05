@@ -23,24 +23,24 @@ class AdIfmTerm extends StatelessWidget {
             ),
           ],
         ),
-        width: 342.w,
+        width: 358.w,
         height: 56.h,
         child: RawMaterialButton(
           elevation: 0.0,
-          fillColor: MIXIN_POINT_COLOR,
+          fillColor: P_1,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0.r),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           onPressed: () {
             Navigator.pop(context);
           },
           child: Text(
-            '확인',
+            '동의',
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.sp,
-                fontFamily: 'SUIT',
-                fontWeight: FontWeight.w600),
+              color: Colors.white,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),
@@ -58,20 +58,18 @@ class AdIfmTerm extends StatelessWidget {
                 Text(
                   '광고성 정보 수신 동의 (선택)',
                   style: TextStyle(
-                    fontFamily: 'SUIT',
                     fontWeight: FontWeight.w600,
-                    fontSize: 26.0.sp,
-                    color: MIXIN_BLACK_1,
+                    fontSize: 26.sp,
+                    color: B_1,
                   ),
                 ),
-                SizedBox(height: 24.0.h),
+                SizedBox(height: 24.h),
                 Text(
                   first,
                   style: TextStyle(
-                    fontFamily: 'SUIT',
                     fontWeight: FontWeight.w500,
-                    fontSize: 13.0.sp,
-                    color: MIXIN_BLACK_2,
+                    fontSize: 13.sp,
+                    color: B_2,
                     height: 1.3.h,
                   ),
                 ),

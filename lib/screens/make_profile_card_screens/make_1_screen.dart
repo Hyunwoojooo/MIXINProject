@@ -29,8 +29,8 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
       floatingActionButton: CustomFloatingActionButton(
         text: '다음',
         fillColor: (positionList.where((element) => element).length == 1)
-            ? MIXIN_POINT_COLOR
-            : MIXIN_BLACK_4,
+            ? P_1
+            : B_4,
         onPressed: () async {
           if (positionList.where((element) => element).length == 1) {
             Navigator.of(context).push(
@@ -49,16 +49,18 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppbarLayout(
+                AppbarIconTextLayout(
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  text: '프로필카드제작',
+                  width: 99.w,
                 ),
-                SizedBox(height: 45.h),
+                SizedBox(height: 63.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -69,58 +71,56 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
                     _circleAvatar('3', false),
                   ],
                 ),
-                SizedBox(height: 24.0.h),
+                SizedBox(height: 24.h),
                 Center(
                   child: Text(
                     '모임 내에서\n나의 포지션은?',
                     style: TextStyle(
-                      fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
-                      fontSize: 24.0.sp,
-                      color: MIXIN_BLACK_1,
+                      fontSize: 28.sp,
+                      color: B_1,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 12.0.h),
+                SizedBox(height: 10.h),
                 Center(
                   child: Container(
                     width: 81.w,
                     height: 36.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18.0.r),
-                      color: MIXIN_BLACK_5,
+                      borderRadius: BorderRadius.circular(18.r),
+                      color: B_5,
                     ),
                     child: Center(
                       child: Text(
                         '참여유형',
                         style: TextStyle(
-                          fontFamily: 'SUIT',
                           fontWeight: FontWeight.w500,
-                          fontSize: 14.0.sp,
-                          color: MIXIN_POINT_COLOR,
+                          fontSize: 14.sp,
+                          color: P_1,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 54.h),
+                SizedBox(height: 44.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButtonFormat(
                       borderSideColor:
-                          positionList[0] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          positionList[0] ? P_1 : B_5,
                       backgroundColor:
-                          positionList[0] == true ? MIXIN_ : Colors.white,
+                          positionList[0] ? P_3 : B_5,
                       containerColor:
-                          positionList[0] == true ? MIXIN_ : Colors.white,
+                          positionList[0] ? P_3 : B_5,
                       mainText: '리더형',
                       subText: '나 빼고 결정하는건\n못참지',
                       onPressed: () {
                         setState(() {
                           positionList[0] = !positionList[0];
-                          if (positionList[0] == true) {
+                          if (positionList[0]) {
                             positionList[1] = false;
                             positionList[2] = false;
                             positionList[3] = false;
@@ -131,20 +131,20 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
                         });
                       },
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: 6.w),
                     ElevatedButtonFormat(
                       borderSideColor:
-                          positionList[1] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          positionList[1] ? P_1 : B_5,
                       backgroundColor:
-                          positionList[1] == true ? MIXIN_ : Colors.white,
+                          positionList[1] ? P_3 : B_5,
                       containerColor:
-                          positionList[1] == true ? MIXIN_ : Colors.white,
+                          positionList[1] ? P_3 : B_5,
                       mainText: '분위기메이커형',
                       subText: '이 모임 분위기는\n내가 책임진다!',
                       onPressed: () {
                         setState(() {
                           positionList[1] = !positionList[1];
-                          if (positionList[1] == true) {
+                          if (positionList[1]) {
                             positionList[2] = false;
                             positionList[0] = false;
                             positionList[3] = false;
@@ -157,16 +157,16 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 14.h),
+                SizedBox(height: 6.h),
                 Row(
                   children: [
                     ElevatedButtonFormat(
                       borderSideColor:
-                          positionList[2] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          positionList[2] ? P_1 : B_5,
                       backgroundColor:
-                          positionList[2] == true ? MIXIN_ : Colors.white,
+                          positionList[2] ? P_3 : B_5,
                       containerColor:
-                          positionList[2] == true ? MIXIN_ : Colors.white,
+                          positionList[2] ? P_3 : B_5,
                       mainText: '다좋아형',
                       subText: '좋아좋아\n뭐든지 다 좋아~',
                       onPressed: () {
@@ -183,20 +183,20 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
                         });
                       },
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: 6.w),
                     ElevatedButtonFormat(
                       borderSideColor:
-                          positionList[3] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          positionList[3] ? P_1 : B_5,
                       backgroundColor:
-                          positionList[3] == true ? MIXIN_ : Colors.white,
+                          positionList[3] ? P_3 : B_5,
                       containerColor:
-                          positionList[3] == true ? MIXIN_ : Colors.white,
+                          positionList[3] ? P_3 : B_5,
                       mainText: '차분형',
                       subText: '당황하지 않아요\n침착하게..',
                       onPressed: () {
                         setState(() {
                           positionList[3] = !positionList[3];
-                          if (positionList[3] == true) {
+                          if (positionList[3]) {
                             positionList[1] = false;
                             positionList[0] = false;
                             positionList[2] = false;
@@ -219,7 +219,7 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
 
   Widget _circleAvatar(String num, bool on) {
     return CircleAvatar(
-      backgroundColor: on ? MIXIN_POINT_COLOR : MIXIN_BLACK_5,
+      backgroundColor: on ? P_1 : B_5,
       radius: 12.0.r,
       child: Text(
         num,
@@ -227,7 +227,7 @@ class _MakePositionScreenState extends State<MakePositionScreen> {
           fontFamily: 'SUIT',
           fontWeight: FontWeight.w500,
           fontSize: 14.0.sp,
-          color: on ? WHITE : MIXIN_BLACK_4,
+          color: on ? WHITE : B_4,
         ),
       ),
     );
@@ -256,16 +256,16 @@ class ElevatedButtonFormat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 165.w,
-      height: 105.h,
+      width: 176.w,
+      height: 110.h,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           side: BorderSide(
             color: borderSideColor,
-            width: 1.5.w,
+            width: 1.w,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0.r),
+            borderRadius: BorderRadius.circular(10.r),
           ),
           padding: EdgeInsets.zero,
           elevation: 0.0,
@@ -282,8 +282,8 @@ class ElevatedButtonFormat extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'SUIT',
                   fontWeight: FontWeight.w500,
-                  fontSize: 14.0.sp,
-                  color: MIXIN_BLACK_3,
+                  fontSize: 14.sp,
+                  color: B_3,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -294,7 +294,7 @@ class ElevatedButtonFormat extends StatelessWidget {
                   fontFamily: 'SUIT',
                   fontSize: 16.0.sp,
                   fontWeight: FontWeight.w600,
-                  color: MIXIN_BLACK_1,
+                  color: B_1,
                 ),
               ),
             ],

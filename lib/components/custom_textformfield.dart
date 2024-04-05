@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 import '../const/colors.dart';
 
@@ -18,9 +17,11 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final double? height;
   final Widget? suffixIcon;
+  final String? initialValue;
   final Color? fillColor;
 
   const CustomTextFormField({
+    this.initialValue,
     this.controller,
     this.onChanged,
     this.hintText,
@@ -46,28 +47,29 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
     return Container(
-      width: width ?? 342.w,
+      width: width ?? 358.w,
       height: height ?? 48.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(
-          color: borderColor ?? MIXIN_BLACK_5,
+          color: borderColor ?? B_5,
           width: 1.5.w,
         ),
       ),
       alignment: Alignment.center,
       child: TextFormField(
+        initialValue: initialValue,
         style: TextStyle(
           fontFamily: 'SUIT',
           fontSize: 16.sp,
           fontWeight: FontWeight.w500,
-          color: MIXIN_BLACK_1,
+          color: B_1,
           decorationThickness: 0,
         ),
         keyboardType: keyboardType ?? TextInputType.text,
         // scrollPadding: EdgeInsets.zero,
         controller: controller,
-        cursorColor: MIXIN_BLACK_4,
+        cursorColor: B_4,
         inputFormatters: inputFormatters,
         obscureText: obscrueText,
         autofocus: autoFocus,
@@ -78,13 +80,13 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hintText,
           errorText: errorText,
           hintStyle: TextStyle(
-            color: MIXIN_BLACK_4,
+            color: B_3,
             fontSize: 16.sp,
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w500,
           ),
           suffixIcon: suffixIcon,
-          fillColor: fillColor ?? WHITE,
+          fillColor: fillColor ?? B_5,
           filled: true,
           border: baseBorder,
           enabledBorder: baseBorder,

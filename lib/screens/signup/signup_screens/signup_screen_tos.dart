@@ -68,8 +68,8 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomFloatingActionButton(
-        text: '다음',
-        fillColor: nextButtonColor == true ? MIXIN_POINT_COLOR : MIXIN_BLACK_4,
+        text: '확인',
+        fillColor: nextButtonColor == true ? P_1 : B_4,
         onPressed: () async {
           if (nextButtonColor == true) {
             Navigator.of(context).push(
@@ -89,25 +89,28 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppbarLayout(
-                  onPressed: () {
+                AppbarIconTextLayout(
+                  onPressed: (){
                     Navigator.pop(context);
                   },
+                  text: '회원가입',
+                  width: 122,
                 ),
-                SizedBox(height: 45.0.h),
+                SizedBox(height: 63.h),
                 const HeadlineText(text: '믹스인이 처음이신가요?\n이용약관 동의가 필요해요!'),
                 SizedBox(height: 50.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: 8.w),
                     IconButton(
                       padding: EdgeInsets.zero,
-                      constraints: BoxConstraints.tight(Size(22.w, 22.h)),
+                      constraints: const BoxConstraints(),
                       onPressed: () {
                         setState(() {
                           isTotalChecked = !isTotalChecked;
@@ -141,8 +144,7 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                     Text(
                       '약관 정책동의',
                       style: TextStyle(
-                        color: MIXIN_BLACK_1,
-                        fontFamily: 'SUIT',
+                        color: B_1,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
                       ),
@@ -150,21 +152,24 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                   ],
                 ),
                 Divider(
-                  height: 30.h,
+                  indent: 8.w,
+                  endIndent: 8.w,
+                  height: 26.h,
                   thickness: 1.0.h,
-                  color: MIXIN_BLACK_5,
+                  color: B_5,
                 ),
-                SizedBox(height: 4.0.h),
+                SizedBox(height: 5.h),
                 Column(
                   children: [
                     // 서비스이용약관
                     SizedBox(
-                      height: 18.0.h,
+                      height: 18.h,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
+                              SizedBox(width: 8.w),
                               IconButton(
                                 padding: EdgeInsets.zero,
                                 constraints:
@@ -188,45 +193,50 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                               Text(
                                 '서비스이용약관 동의 (필수)',
                                 style: TextStyle(
-                                  color: MIXIN_BLACK_1,
-                                  fontFamily: 'SUIT',
-                                  fontSize: 14.0.sp,
+                                  color: B_1,
+                                  fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
                           ),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints.tight(Size(18.w, 18.h)),
-                            iconSize: 18.0.w,
-                            onPressed: () {
-                              setState(() {
-                                isServiceUserChecked = true;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ServiceUseTerm(),
+                          Row(
+                            children: [
+                              IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints.tight(Size(18.w, 18.h)),
+                                iconSize: 18.0.w,
+                                onPressed: () {
+                                  setState(() {
+                                    isServiceUserChecked = true;
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ServiceUseTerm(),
+                                    ),
+                                  );
+                                },
+                                icon: Image.asset(
+                                  'assets/images/arrow_right_3x.png',
                                 ),
-                              );
-                            },
-                            icon: Image.asset(
-                              'assets/images/arrow_right_3x.png',
-                            ),
+                              ),
+                              SizedBox(width: 8.w),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 15.0.h),
+                    SizedBox(height: 15.h),
                     // 개인정보처리방침
                     SizedBox(
-                      height: 18.0.h,
+                      height: 18.h,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
+                              SizedBox(width: 8.w),
                               IconButton(
                                 padding: EdgeInsets.zero,
                                 constraints:
@@ -250,7 +260,7 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                               Text(
                                 '개인정보처리방침 동의 (필수)',
                                 style: TextStyle(
-                                  color: MIXIN_BLACK_1,
+                                  color: B_1,
                                   fontFamily: 'SUIT',
                                   fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
@@ -258,37 +268,43 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                               ),
                             ],
                           ),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints.tight(Size(18.w, 18.h)),
-                            onPressed: () {
-                              setState(() {
-                                isPersonalIfmChecked = true;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PersonalIfmterm()),
-                              );
-                            },
-                            icon: Image.asset(
-                              'assets/images/arrow_right_3x.png',
-                              width: 18.w,
-                              height: 18.h,
-                            ),
+                          Row(
+                            children: [
+                              IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints.tight(Size(18.w, 18.h)),
+                                onPressed: () {
+                                  setState(() {
+                                    isPersonalIfmChecked = true;
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PersonalIfmterm()),
+                                  );
+                                },
+                                icon: Image.asset(
+                                  'assets/images/arrow_right_3x.png',
+                                  width: 18.w,
+                                  height: 18.h,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 15.0.h),
+                    SizedBox(height: 15.h),
                     // 커뮤니티이용규칙
                     SizedBox(
-                      height: 18.0.h,
+                      height: 18.h,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
+                              SizedBox(width: 8.w),
                               IconButton(
                                 padding: EdgeInsets.zero,
                                 constraints:
@@ -314,7 +330,7 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                               Text(
                                 '커뮤니티이용규칙 확인 (필수)',
                                 style: TextStyle(
-                                  color: MIXIN_BLACK_1,
+                                  color: B_1,
                                   fontFamily: 'SUIT',
                                   fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
@@ -322,25 +338,30 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                               ),
                             ],
                           ),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints.tight(Size(18.w, 18.h)),
-                            iconSize: 18.0.w,
-                            onPressed: () {
-                              setState(() {
-                                isCommunityChecked = true;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CommunityUseTerm()),
-                              );
-                            },
-                            icon: Image.asset(
-                              'assets/images/arrow_right_3x.png',
-                              width: 18.w,
-                              height: 18.h,
-                            ),
+                          Row(
+                            children: [
+                              IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints.tight(Size(18.w, 18.h)),
+                                iconSize: 18.0.w,
+                                onPressed: () {
+                                  setState(() {
+                                    isCommunityChecked = true;
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CommunityUseTerm()),
+                                  );
+                                },
+                                icon: Image.asset(
+                                  'assets/images/arrow_right_3x.png',
+                                  width: 18.w,
+                                  height: 18.h,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                            ],
                           ),
                         ],
                       ),
@@ -354,6 +375,7 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                         children: [
                           Row(
                             children: [
+                              SizedBox(width: 8.w),
                               IconButton(
                                 padding: EdgeInsets.zero,
                                 constraints:
@@ -384,43 +406,48 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                               Text(
                                 '광고성 정보 수신 동의 (선택)',
                                 style: TextStyle(
-                                  color: MIXIN_BLACK_1,
-                                  fontFamily: 'SUIT',
+                                  color: B_1,
                                   fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
                           ),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints.tight(Size(18.w, 18.h)),
-                            iconSize: 18.0.w,
-                            onPressed: () {
-                              setState(() {
-                                isAdIfmChecked = true;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AdIfmTerm()),
-                              );
-                            },
-                            icon: Image.asset(
-                              'assets/images/arrow_right_3x.png',
-                              width: 18.w,
-                              height: 18.h,
-                            ),
+                          Row(
+                            children: [
+                              IconButton(
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints.tight(Size(18.w, 18.h)),
+                                iconSize: 18.w,
+                                onPressed: () {
+                                  setState(() {
+                                    isAdIfmChecked = true;
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AdIfmTerm()),
+                                  );
+                                },
+                                icon: Image.asset(
+                                  'assets/images/arrow_right_3x.png',
+                                  width: 18.w,
+                                  height: 18.h,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 34.h),
+                    SizedBox(height: 33.h),
                     // 본인 명의
                     SizedBox(
-                      height: 20.0.h,
+                      height: 20.h,
                       child: Row(
                         children: [
+                          SizedBox(width: 8.w),
                           IconButton(
                             padding: EdgeInsets.zero,
                             constraints: BoxConstraints.tight(Size(18.w, 18.h)),
@@ -442,28 +469,30 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                           Text(
                             '본인 명의를 이용하여 가입을 진행하겠습니다.',
                             style: TextStyle(
-                              color: MIXIN_BLACK_1,
-                              fontFamily: 'SUIT',
-                              fontSize: 16.0.sp,
+                              color: B_1,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 15.h),
+                    SizedBox(height: 13.h),
                     // 본인 명의 내용
                     Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12.w,
-                        vertical: 12.h,
+                      margin: EdgeInsets.symmetric(horizontal: 8.w),
+                      padding: EdgeInsets.only(
+                        left: 12.w,
+                        right: 35.w,
+                        top: 12.h,
+                        bottom: 12.h
                       ),
                       // alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF2F3F7),
-                        borderRadius: BorderRadius.circular(8.0.r),
+                        color: B_5,
+                        borderRadius: BorderRadius.circular(8.r),
                         border: Border.all(
-                          color: const Color(0xFFCED0D5),
+                          color: B_4,
                           width: 1.0.w,
                         ),
                       ),
@@ -476,9 +505,8 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                             '부모님, 친구 등 타인의 명의로 가입할 수 없습니다.',
                             style: TextStyle(
                               fontSize: 12.sp,
-                              fontFamily: 'SUIT',
                               fontWeight: FontWeight.w600,
-                              color: MIXIN_BLACK_2,
+                              color: B_2,
                             ),
                           ),
                           Text(
@@ -486,20 +514,20 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 12.sp,
-                              fontFamily: 'SUIT',
-                              color: MIXIN_BLACK_2,
+                              color: B_2,
                               height: 1.4.h,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 34.0.h),
+                    SizedBox(height: 34.h),
                     // 14세 이상
                     SizedBox(
-                      height: 20.0.h,
+                      height: 20.h,
                       child: Row(
                         children: [
+                          SizedBox(width: 8.w),
                           IconButton(
                             padding: EdgeInsets.zero,
                             constraints: BoxConstraints.tight(Size(18.w, 18.h)),
@@ -521,19 +549,18 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                           Text(
                             '만 14세 이상입니다.',
                             style: TextStyle(
-                              color: MIXIN_BLACK_1,
-                              fontFamily: 'SUIT',
-                              fontSize: 16.0.sp,
+                              color: B_1,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 15.w),
+                    SizedBox(height: 13.w),
                     // 14세 이상 내용
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      padding: EdgeInsets.only(left: 12.w, right: 25.w, top: 12.h, bottom: 12.h),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: const Color(0xFFF2F3F7),
@@ -544,14 +571,13 @@ class _SignUpTosScreenState extends State<SignUpTosScreen> {
                         ),
                       ),
                       width: 342.w,
-                      height: 50.h,
+                      height: 60.h,
                       child: Text(
                         ageTextMain,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 12.0.sp,
-                          fontFamily: 'SUIT',
-                          color: MIXIN_BLACK_2,
+                          fontSize: 12.sp,
+                          color: B_2,
                           height: 1.4.h,
                         ),
                       ),

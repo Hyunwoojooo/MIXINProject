@@ -31,7 +31,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final String serverUrl = 'http://$ip/login';
-  bool isError = false;
+  bool isError = true;
 
   final _idTextEditController = TextEditingController();
   final _passwordTextController = TextEditingController();
@@ -54,25 +54,25 @@ class _LoginScreenState extends State<LoginScreen> {
           bottom: false,
           child: Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(
                 children: [
-                  SizedBox(height: 162.h),
+                  SizedBox(height: 169.11.h),
                   Image.asset(
                     'assets/images/mixin_logo.png',
                     width: 124.w,
                     height: 34.h,
                   ),
-                  SizedBox(height: 16.0.h),
+                  SizedBox(height: 11.09.h),
                   Text(
                     'Everyone\'s playground',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 14.0.sp,
-                      color: MIXIN_POINT_COLOR,
+                      color: P_1,
                     ),
                   ),
-                  SizedBox(height: 67.h),
+                  SizedBox(height: 76.h),
                   //username TextField
                   CustomTextFormField(
                     hintText: '학교 이메일',
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {});
                     },
                   ),
-                  SizedBox(height: 12.0.h),
+                  SizedBox(height: 12.h),
                   //password TextField
                   CustomTextFormField(
                     hintText: '비밀번호',
@@ -91,26 +91,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     obscrueText: true,
                   ),
-                  SizedBox(height: 8.h),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      '로그인 정보를 다시 확인해주세요',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: isError ? ErrorColor : Colors.transparent,
+                  SizedBox(height: 10.h),
+                  Row(
+                    children: [
+                      SizedBox(width: 19.w),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '로그인 정보를 다시 확인해주세요',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                            color: isError ? ErrorColor : Colors.transparent,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  SizedBox(height: 107.0.h),
+                  SizedBox(height: 86.h),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0.r),
                       ),
                       elevation: 0.0,
-                      backgroundColor: MIXIN_POINT_COLOR,
+                      backgroundColor: P_1,
                     ),
                     onPressed: () async {
                       print('1');
@@ -185,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           '로그인',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: WHITE,
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w600,
                           ),
@@ -193,11 +198,40 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 14.h),
+                  SizedBox(height: 24.h),
                   IntrinsicHeight(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const FindPasswordScreen1()),
+                            );
+                          },
+                          child: Text(
+                            '비밀번호 찾기',
+                            style: TextStyle(
+                              color: B_4,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0.w, vertical: 8.h),
+                          child: Container(
+                            width: 1.w,
+                            height: 12.h,
+                            color: B_4,
+                          ),
+                        ),
                         TextButton(
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
@@ -211,8 +245,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             '아이디 찾기',
                             style: TextStyle(
-                              color: MIXIN_BLACK_4,
-                              fontSize: 12.sp,
+                              color: B_4,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -223,36 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Container(
                             width: 1.w,
                             height: 12.h,
-                            color: MIXIN_BLACK_4,
-                          ),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const FindPasswordScreen1()),
-                            );
-                          },
-                          child: Text(
-                            '비밀번호 찾기',
-                            style: TextStyle(
-                              color: MIXIN_BLACK_4,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 8.0.w, vertical: 8.h),
-                          child: Container(
-                            width: 1.w,
-                            height: 12.h,
-                            color: MIXIN_BLACK_4,
+                            color: B_4,
                           ),
                         ),
                         TextButton(
@@ -266,8 +271,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             '회원가입',
                             style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: MIXIN_POINT_COLOR,
+                              color: P_1,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),

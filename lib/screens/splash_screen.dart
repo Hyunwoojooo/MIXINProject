@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
             height: 28.0,
           ),
           const CircularProgressIndicator(
-            color: MIXIN_POINT_COLOR,
+            color: P_1,
           )
         ],
       ),

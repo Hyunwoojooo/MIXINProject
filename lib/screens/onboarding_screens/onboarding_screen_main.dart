@@ -77,9 +77,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Column(
                       children: [
                         SizedBox(height: 180.h),
-                        CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 105.r,
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.7),
+                                spreadRadius: 0,
+                                blurRadius: 5,
+                                offset: Offset(5,7),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(210.r),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(210.r),
+                            child: Image.asset(
+                              'assets/images/1.png',
+                              width: 210.w,
+                              height: 210.h,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 63.h,
@@ -100,9 +118,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Column(
                       children: [
                         SizedBox(height: 180.h),
-                        CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 105.r,
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.7),
+                                spreadRadius: 0,
+                                blurRadius: 5,
+                                offset: Offset(5, 7),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(210.r),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(210.r),
+                            child: Image.asset(
+                              'assets/images/3.png',
+                              width: 210.w,
+                              height: 210.h,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                         ),
                         SizedBox(height: 63.h),
                         Text(
@@ -121,9 +157,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: Column(
                       children: [
                         SizedBox(height: 180.h),
-                        CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 105.r,
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.7),
+                                spreadRadius: 0,
+                                blurRadius: 5,
+                                offset: Offset(5, 7),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(210.r),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(210.r),
+                            child: Image.asset(
+                              'assets/images/2.png',
+                              width: 210.w,
+                              height: 210.h,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                         ),
                         SizedBox(height: 63.h),
                         Text(
@@ -149,8 +203,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               count: 3,
               effect: WormEffect(
                 spacing: 18.w,
-                dotColor: MIXIN_BLACK_5,
-                activeDotColor: MIXIN_POINT_COLOR,
+                dotColor: B_5,
+                activeDotColor: P_1,
                 dotHeight: 8.h,
                 dotWidth: 8.w,
               ), // your preferred effect
@@ -162,7 +216,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: MIXIN_POINT_COLOR,
+                  backgroundColor: P_1,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0.r)),
                   elevation: 0.0),
@@ -221,7 +275,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       fontSize: 14.sp,
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w500,
-                      color: MIXIN_POINT_COLOR,
+                      color: P_1,
                     ),
                   ),
                 ),

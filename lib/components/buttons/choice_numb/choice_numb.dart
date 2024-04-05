@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../choice_cycle/numbs.dart';
 
@@ -13,11 +14,14 @@ class ChoiceNumb extends StatefulWidget {
 class _ChoiceNumbState extends State<ChoiceNumb> {
   late FixedExtentScrollController _controller;
 
+  void _saveData(String key, String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
     _controller = FixedExtentScrollController();
   }
 
@@ -48,6 +52,10 @@ class _ChoiceNumbState extends State<ChoiceNumb> {
                 overAndUnderCenterOpacity: 0.2,
                 useMagnifier: true,
                 magnification: 1.3,
+                onSelectedItemChanged: (value){
+                  _saveData('moimMemberLimit', value.toString());
+                  print(value.toString());
+                },
                 physics: const FixedExtentScrollPhysics(),
                 childDelegate: ListWheelChildListDelegate(
                   children: List<Widget>.generate(31, (index) {

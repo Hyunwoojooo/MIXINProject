@@ -29,9 +29,8 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomFloatingActionButton(
         text: '다음',
-        fillColor: selectList.where((element) => element).isNotEmpty
-            ? MIXIN_POINT_COLOR
-            : MIXIN_BLACK_4,
+        fillColor:
+            selectList.where((element) => element).isNotEmpty ? P_1 : B_4,
         onPressed: () async {
           if (selectList.where((element) => element).isNotEmpty) {
             Navigator.of(context).push(
@@ -50,83 +49,82 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppbarLayout(
+                AppbarIconTextLayout(
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  text: '프로필카드제작',
+                  width: 99.w,
                 ),
-                SizedBox(height: 45.h),
+                SizedBox(height: 63.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _circleAvatar('1', false),
-                    SizedBox(width: 12.0.w),
+                    SizedBox(width: 12.w),
                     _circleAvatar('2', false),
-                    SizedBox(width: 12.0.w),
+                    SizedBox(width: 12.w),
                     _circleAvatar('3', true),
                   ],
                 ),
-                SizedBox(height: 24.0.h),
+                SizedBox(height: 24.h),
                 Center(
                   child: Text(
                     '모임 참여 시\nOO이 가장 중요해요!',
                     style: TextStyle(
-                      fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
-                      fontSize: 24.0.sp,
+                      fontSize: 28.sp,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 12.0.h),
+                SizedBox(height: 10.h),
                 Center(
                   child: Container(
-                    width: 81.w,
+                    width: 69.w,
                     height: 36.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18.0.r),
-                      color: MIXIN_BLACK_5,
+                      borderRadius: BorderRadius.circular(18.r),
+                      color: B_5,
                     ),
                     child: Center(
                       child: Text(
                         '가치관',
                         style: TextStyle(
-                          fontFamily: 'SUIT',
                           fontWeight: FontWeight.w500,
-                          fontSize: 14.0.sp,
-                          color: MIXIN_POINT_COLOR,
+                          fontSize: 14.sp,
+                          color: P_1,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 54.h),
+                SizedBox(height: 44.h),
                 Center(
                   child: SizedBox(
-                    width: 342.w,
-                    height: 105.h,
+                    width: 358.w,
+                    height: 110.h,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          side: BorderSide(
-                            color:
-                                selectList[0] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                            width: 1.5.w,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0.r),
-                          ),
-                          padding: EdgeInsets.zero,
-                          elevation: 0.0,
-                          backgroundColor:
-                              selectList[0] == true ? MIXIN_ : Colors.white),
+                        side: BorderSide(
+                          color: selectList[0] ? P_1 : B_5,
+                          width: 1.w,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        padding: EdgeInsets.zero,
+                        elevation: 0.0,
+                        backgroundColor: selectList[0] ? P_3 : B_5,
+                      ),
                       onPressed: () {
                         setState(() {
                           selectList[0] = !selectList[0];
-                          if (selectList[0] == true) {
+                          if (selectList[0]) {
                             selectList[1] = false;
                             selectList[2] = false;
                             selectOptions.clear();
@@ -138,42 +136,45 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
                       child: Container(
                         margin: EdgeInsets.fromLTRB(24.w, 26.h, 0, 0),
                         alignment: Alignment.centerLeft,
-                        color: selectList[0] == true ? MIXIN_ : Colors.white,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          color: selectList[0] ? P_3 : B_5,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _title('소통'),
-                            SizedBox(height: 7.0.h),
-                            _subtitle('소통이 원활하게 이뤄지는 게 중요하지!'),
+                            _title('소통', selectList[0] ? P_1 : B_2),
+                            SizedBox(height: 8.h),
+                            _subtitle('소통이 원활하게 이뤄지는 게 중요하지!', selectList[0] ? P_1 : B_3),
                           ],
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 12.0.h),
+                SizedBox(height: 6.h),
                 SizedBox(
-                  width: 342.w,
-                  height: 105.h,
+                  width: 358.w,
+                  height: 110.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       side: BorderSide(
-                          color:
-                              selectList[1] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                          width: 1.5.w),
+                        color: selectList[1] ? P_1 : B_5,
+                        width: 1.w,
+                      ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0.r),
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
                       padding: EdgeInsets.zero,
                       elevation: 0.0,
                       backgroundColor:
-                          selectList[1] == true ? MIXIN_ : Colors.white,
+                          selectList[1]? P_3 : B_5,
                     ),
                     onPressed: () {
                       setState(() {
                         selectList[1] = !selectList[1];
-                        if (selectList[1] == true) {
+                        if (selectList[1]) {
                           selectList[0] = false;
                           selectList[2] = false;
                           selectOptions.clear();
@@ -185,14 +186,17 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
                     child: Container(
                       margin: EdgeInsets.fromLTRB(24.w, 26.h, 0, 0),
                       alignment: Alignment.centerLeft,
-                      color: selectList[1] == true ? MIXIN_ : Colors.white,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: selectList[1] ? P_3 : B_5,
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _title('열정'),
-                          SizedBox(height: 7.0.h),
-                          _subtitle('모든 일의 시작은 열정이 아니겠어?'),
+                          _title('열정', selectList[1] ? P_1 : B_2),
+                          SizedBox(height: 8.h),
+                          _subtitle('모든 일의 시작은 열정이 아니겠어?', selectList[1] ? P_1 : B_3),
                         ],
                       ),
                     ),
@@ -200,25 +204,24 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
                 ),
                 SizedBox(height: 12.0.h),
                 SizedBox(
-                  width: 342.w,
-                  height: 105.h,
+                  width: 358.w,
+                  height: 110.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         side: BorderSide(
-                            color:
-                                selectList[2] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                            width: 1.5.w),
+                            color: selectList[2] == true ? P_2 : B_5,
+                            width: 1.w),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0.r),
                         ),
                         padding: EdgeInsets.zero,
                         elevation: 0.0,
                         backgroundColor:
-                            selectList[2] == true ? MIXIN_ : Colors.white),
+                            selectList[2] ? P_3 : B_5),
                     onPressed: () {
                       setState(() {
                         selectList[2] = !selectList[2];
-                        if (selectList[2] == true) {
+                        if (selectList[2]) {
                           selectList[0] = false;
                           selectList[1] = false;
                           selectOptions.clear();
@@ -230,14 +233,17 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
                     child: Container(
                       margin: EdgeInsets.fromLTRB(24.w, 26.h, 0, 0),
                       alignment: Alignment.centerLeft,
-                      color: selectList[2] == true ? MIXIN_ : Colors.white,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: selectList[2] ? P_3 : B_5,
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _title('약속'),
-                          SizedBox(height: 7.0.h),
-                          _subtitle('약속은 기본 매너 아니겠어?'),
+                          _title('약속', selectList[2] ? P_1 : B_2),
+                          SizedBox(height: 8.h),
+                          _subtitle('약속은 기본 매너 아니겠어?', selectList[2] ? P_1 : B_3),
                         ],
                       ),
                     ),
@@ -251,34 +257,34 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
     );
   }
 
-  Widget _title(String text) {
+  Widget _title(String text, Color fontColor) {
     return Text(
       text,
       style: TextStyle(
         fontFamily: 'SUIT',
         fontWeight: FontWeight.w600,
-        fontSize: 20.0.sp,
-        color: MIXIN_BLACK_1,
+        fontSize: 22.sp,
+        color: fontColor,
       ),
       textAlign: TextAlign.center,
     );
   }
 
-  Widget _subtitle(String text) {
+  Widget _subtitle(String text, Color fontColor) {
     return Text(
       text,
       style: TextStyle(
         fontFamily: 'SUIT',
-        fontSize: 16.0.sp,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w500,
-        color: MIXIN_BLACK_3,
+        color: fontColor,
       ),
     );
   }
 
   Widget _circleAvatar(String num, bool on) {
     return CircleAvatar(
-      backgroundColor: on ? MIXIN_POINT_COLOR : MIXIN_BLACK_5,
+      backgroundColor: on ? P_1 : B_5,
       radius: 12.0.r,
       child: Text(
         num,
@@ -286,7 +292,7 @@ class _MakeImportantScreenState extends State<MakeImportantScreen> {
           fontFamily: 'SUIT',
           fontWeight: FontWeight.w500,
           fontSize: 14.0.sp,
-          color: on ? WHITE : MIXIN_BLACK_4,
+          color: on ? WHITE : B_4,
         ),
       ),
     );

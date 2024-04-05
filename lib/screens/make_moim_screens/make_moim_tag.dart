@@ -8,6 +8,7 @@ import '../../layout/custom_floating_action_button.dart';
 import 'make_moim_2.dart';
 
 class TagPage extends StatefulWidget {
+
   const TagPage({Key? key}) : super(key: key);
 
   @override
@@ -15,12 +16,13 @@ class TagPage extends StatefulWidget {
 }
 
 class _TagPageState extends State<TagPage> {
-  final List<String> _displayTexts = [];
   final TextEditingController _textEditingController = TextEditingController();
+  List<String> displayTexts = [];
+
 
   void _removeItem(int index) {
     setState(() {
-      _displayTexts.removeAt(index);
+      displayTexts.removeAt(index);
     });
   }
 
@@ -43,9 +45,9 @@ class _TagPageState extends State<TagPage> {
                   children: [
                     AppbarLayout(
                       onPressed: () {
-                        _saveData('moimTags', _displayTexts);
-                        print(_displayTexts);
-                        Navigator.pop(context);
+                        _saveData('moimTags', displayTexts);
+                        print(displayTexts);
+                        Navigator.pop(context, displayTexts);
                       },
                     ),
                     SizedBox(width: 16.w),
@@ -55,9 +57,8 @@ class _TagPageState extends State<TagPage> {
                         '모임 만들기',
                         style: TextStyle(
                           fontSize: 18.sp,
-                          fontFamily: 'SUIT',
                           fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_1,
+                          color: B_1,
                         ),
                       ),
                     )
@@ -68,9 +69,8 @@ class _TagPageState extends State<TagPage> {
                   '태그',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontFamily: 'SUIT',
                     fontSize: 14.sp,
-                    color: MIXIN_BLACK_1,
+                    color: B_1,
                   ),
                 ),
                 SizedBox(height: 16.h),
@@ -92,26 +92,26 @@ class _TagPageState extends State<TagPage> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: MIXIN_BLACK_5, width: 1.0.w),
+                          BorderSide(color: B_5, width: 1.0.w),
                       borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: MIXIN_BLACK_5, width: 1.0.w),
+                          BorderSide(color: B_5, width: 1.0.w),
                       borderRadius: BorderRadius.all(Radius.circular(8.0.r)),
                     ),
                     hintStyle: TextStyle(
                       fontSize: 14.sp,
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w500,
-                      color: MIXIN_BLACK_4,
+                      color: B_4,
                     ),
                     filled: true,
-                    fillColor: MIXIN_BLACK_5,
+                    fillColor: B_5,
                   ),
                   onSubmitted: (value) {
                     setState(() {
-                      _displayTexts.add(value);
+                      displayTexts.add(value);
                       _textEditingController.clear();
                     });
                   },
@@ -120,7 +120,7 @@ class _TagPageState extends State<TagPage> {
                 Wrap(
                   spacing: 12.w,
                   runSpacing: 12.w,
-                  children: _displayTexts
+                  children: displayTexts
                       .asMap()
                       .entries
                       .map(
@@ -134,7 +134,7 @@ class _TagPageState extends State<TagPage> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 12.w, vertical: 7.5.h),
                             decoration: BoxDecoration(
-                              color: MIXIN_,
+                              color: P_3,
                               borderRadius: BorderRadius.circular(8.r),
                             ),
                             child: Row(
@@ -146,7 +146,7 @@ class _TagPageState extends State<TagPage> {
                                   style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: MIXIN_POINT_COLOR,
+                                    color: P_1,
                                   ),
                                 ),
                                 SizedBox(width: 8.w),

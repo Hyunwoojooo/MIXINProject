@@ -21,7 +21,7 @@ class _MoimTermButtonState extends State<MoimTermButton> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(
-          color: MIXIN_BLACK_5,
+          color: B_5,
           width: 1.5.w,
         ),
       ),
@@ -36,7 +36,7 @@ class _MoimTermButtonState extends State<MoimTermButton> {
                 fontWeight: FontWeight.w500,
                 fontSize: 16.sp,
                 fontFamily: 'SUIT',
-                color: MIXIN_BLACK_4,
+                color: B_4,
               ),
             ),
           ),
@@ -72,7 +72,7 @@ class _MoimTermButtonState extends State<MoimTermButton> {
                               child: Center(
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: MIXIN_POINT_COLOR,
+                                    backgroundColor: P_1,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0.r)),

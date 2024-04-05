@@ -32,6 +32,7 @@ class _MainProfileSettingState extends State<MainProfileSetting> {
                     Navigator.pop(context);
                   },
                   text: '설정',
+                  width: 99,
                 ),
                 SizedBox(height: 41.h),
                 Text(
@@ -73,7 +74,7 @@ class _MainProfileSettingState extends State<MainProfileSetting> {
                       text: '방해금지 시간 설정',
                     ),
                     CupertinoSwitch(
-                      activeColor: MIXIN_POINT_COLOR,
+                      activeColor: P_1,
                       value: isToggleSwitch,
                       onChanged: (value) {
                         setState(() {
@@ -118,7 +119,7 @@ class _MainProfileSettingState extends State<MainProfileSetting> {
                       style: TextStyle(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w500,
-                        color: MIXIN_BLACK_3,
+                        color: B_3,
                       ),
                     )
                   ],

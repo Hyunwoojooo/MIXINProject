@@ -49,7 +49,9 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        text: '나의 이웃'),
+                        text: '나의 이웃',
+                      width: 99,
+                    ),
                     Padding(
                       padding: EdgeInsets.only(top: 18.h),
                       child: GestureDetector(
@@ -68,7 +70,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                 SizedBox(height: 16.h),
                 Container(
                   decoration: BoxDecoration(
-                    color: MIXIN_BLACK_5,
+                    color: B_5,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   padding: EdgeInsets.only(left: 5.w),
@@ -78,7 +80,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                         'assets/images/icons/search_icon.png',
                         height: 26.h,
                         width: 26.w,
-                        color: MIXIN_BLACK_3,
+                        color: B_3,
                       ),
                       SizedBox(width: 8.w),
                       SizedBox(
@@ -88,7 +90,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                           keyboardType: TextInputType.text,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            color: MIXIN_BLACK_1,
+                            color: B_1,
                             fontSize: 16.sp,
                           ),
                           maxLines: 1,
@@ -98,7 +100,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                             hintText: '이름으로 이웃을 검색하세요.',
                             hintStyle: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: MIXIN_BLACK_3,
+                              color: B_3,
                               fontSize: 16.sp,
                             ),
                           ),
@@ -115,7 +117,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
-                        color: MIXIN_BLACK_3,
+                        color: B_3,
                       ),
                     ),
                     SizedBox(width: 6.w),
@@ -124,7 +126,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
-                        color: MIXIN_BLACK_3,
+                        color: B_3,
                       ),
                     ),
                   ],
@@ -149,7 +151,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
-                        color: MIXIN_BLACK_3,
+                        color: B_3,
                       ),
                     ),
                     SizedBox(width: 6.w),
@@ -158,7 +160,7 @@ class _MainProfileMyFriendState extends State<MainProfileMyFriend> {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
-                        color: MIXIN_BLACK_3,
+                        color: B_3,
                       ),
                     ),
                   ],

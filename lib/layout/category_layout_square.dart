@@ -64,7 +64,7 @@ class CategoryLayout extends StatelessWidget {
                     fontFamily: 'SUIT',
                     fontSize: 16.0.sp,
                     fontWeight: FontWeight.w500,
-                    color: MIXIN_BLACK_1,
+                    color: B_1,
                 ),
               ),
             ],

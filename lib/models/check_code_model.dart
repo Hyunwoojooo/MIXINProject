@@ -1,34 +1,25 @@
-// To parse this JSON data, do
-//
-//     final checkCodeModel = checkCodeModelFromJson(jsonString);
+class UserProfileCreate{
+  final String userPosition;
+  final List<String> userPersonalitys;
+  final String userValues;
+  final String userNickName;
+  final String userIntroduceText;
 
-import 'dart:convert';
+  UserProfileCreate({
+    required this.userPosition,
+    required this.userPersonalitys,
+    required this.userValues,
+    required this.userNickName,
+    required this.userIntroduceText,
+});
 
-CheckCodeModel checkCodeModelFromJson(String str) =>
-    CheckCodeModel.fromJson(json.decode(str));
-
-String checkCodeModelToJson(CheckCodeModel data) => json.encode(data.toJson());
-
-class CheckCodeModel {
-  int code;
-  String message;
-  dynamic data;
-
-  CheckCodeModel({
-    required this.code,
-    required this.message,
-    this.data,
-  });
-
-  factory CheckCodeModel.fromJson(Map<String, dynamic> json) => CheckCodeModel(
-        code: json["code"],
-        message: json["message"],
-        data: json["data"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "code": code,
-        "message": message,
-        "data": data,
-      };
+  factory UserProfileCreate.fromJson(Map<String, dynamic> json) {
+    return UserProfileCreate(
+      userPosition: json['userPosition'],
+      userPersonalitys: json['userPersonalitys'],
+      userValues: json['userValues'],
+      userNickName: json['userNickName'],
+      userIntroduceText: json['userIntroduceText'],
+    );
+  }
 }

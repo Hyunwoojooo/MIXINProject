@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mixin_mac_2/screens/moim/moim_screens/moim_noticeboard/moim_noticeboard_main_screen.dart';
@@ -5,10 +8,17 @@ import 'package:mixin_mac_2/screens/moim/moim_screens/moim_noticeboard/moim_noti
 
 import '../../../../components/profile_image.dart';
 import '../../../../const/colors.dart';
+import '../../../../const/data.dart';
+import '../../../../models/my_moim_model/member_model.dart';
+import '../../../../models/my_moim_noticeboard_model/moim_notice_model.dart';
+import '../../../../models/my_moim_noticeboard_model/moim_post_model.dart';
+import 'moim_noticeboard_notice_main_screen.dart';
 import 'moim_noticeboard_post_detail.dart';
 
 class MoimNoticeboardScreen extends StatefulWidget {
-  const MoimNoticeboardScreen({Key? key}) : super(key: key);
+  final int moimId;
+
+  const MoimNoticeboardScreen(this.moimId, {Key? key}) : super(key: key);
 
   @override
   State<MoimNoticeboardScreen> createState() => _MoimNoticeboardScreenState();
@@ -17,11 +27,78 @@ class MoimNoticeboardScreen extends StatefulWidget {
 class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
   final ScrollController _scrollController = ScrollController();
 
+  String url = '';
+  int moimId = 0;
+
+  Dio dio = Dio();
+  List<MoimPostModel> postDataList = [];
+  List<Member> memberDataList = [];
+
+  int noticeId = 0;
+  String noticeTitle = '';
+  String noticeCreateAt = '';
+  int viewCount = 0;
+  int commentCount = 0;
+  bool checked = false;
+
+  void fetchData() async {
+    String? refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
+
+    // dio 사용
+    try {
+      Options options = Options(
+        headers: {
+          "Authorization": jsonDecode(refreshToken!)[0],
+        },
+        method: 'GET',
+      );
+
+      final Response resp = await dio.get(
+        url,
+        options: options,
+      );
+      print(resp);
+
+      Map<String, dynamic> data = await resp.data;
+      print('data = $data');
+
+      for (var boardData in data['data']['boards']) {
+        postDataList.add(MoimPostModel.fromJson(boardData));
+      }
+
+      for (var board in data['data']['boards']) {
+        var makedUser = board['makedUser'];
+        memberDataList.add(Member.fromJson(makedUser));
+      }
+
+      noticeId = data['data']['notice']['noticeId'];
+      noticeTitle = data['data']['notice']['title'];
+      noticeCreateAt = data['data']['notice']['createAt'];
+      viewCount = data['data']['notice']['viewCount'];
+      checked = data['data']['notice']['checked'];
+    } catch (e) {
+      if (e is DioError) {
+        if (e.response != null) {
+          print('DioError response: ${e.response}');
+        } else {
+          print('DioError error: $e');
+        }
+      } else {
+        print('Unexpected error: $e');
+      }
+    }
+    setState(() {});
+  }
+
   @override
   void initState() {
     _scrollController.addListener(() {
       scrollListener();
     });
+    moimId = widget.moimId;
+    url = 'http://$ip/api/moim/boards?moimId=$moimId';
+    // url = 'http://$ip/api/moim/boards?moimId=30';
+    fetchData();
     super.initState();
   }
 
@@ -39,7 +116,8 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
         !_scrollController.position.outOfRange) {
       print('스크롤이 맨 바닥에 위치해 있습니다');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => MoimNoticeboardMainScreen()),
+        MaterialPageRoute(
+            builder: (context) => MoimNoticeboardMainScreen(widget.moimId)),
       );
     } else if (_scrollController.offset ==
             _scrollController.position.minScrollExtent &&
@@ -47,48 +125,6 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
       print('스크롤이 맨 위에 위치해 있습니다');
     }
   }
-
-  final List<String> name = ['먼지이잉', '현우우우우', '다비디이이인', '지워너너넌'];
-  final List<String> ttext = [
-    '오픈데이터 항목인데, 여기 들어가면 다전공 학생들의 통계랑 졸업자수, 개설된 강의들이 어떤 교재 쓰는지 다나와!!! 대박인데? ...더보기',
-    '오픈데이터 항목인데, 여기 들어가면 다전공 학생들의 통계랑 졸업자수, 개설된 강의들이 어떤 교재 쓰는지 다나와!!! 대박인데? ...더보기',
-    '오픈데이터 항목인데, 여기 들어가면 다전공 학생들의 통계랑 졸업자수, 개설된 강의들이 어떤 교재 쓰는지 다나와!!! 대박인데? ...더보기',
-    '오픈데이터 항목인데, 여기 들어가면 다전공 학생들의 통계랑 졸업자수, 개설된 강의들이 어떤 교재 쓰는지 다나와!!! 대박인데? ...더보기',
-  ];
-
-  final List dummyNotice = [
-    '18',
-    '졸전 인스타 아카이빙 투표관련 공지',
-    '2023년 10월 1일',
-    '‼️‼️‼️‼️중요공지‼️‼️‼️‼️'
-        '커밤이 열리기 위한 행정절차의 일환으로 학우 여러분이 꼭!!!해주셔야 하는 일이 있습니다!!!!!'
-        '커밤에 와주시는 ⚠️모든⚠️학우분들이 반드시! 모두! 위인전 홈페이지에서 커밤을 신청해주셔야 한다고 합니다‼️ 아래 링크를 통해 위인전에 접속하거나, 또는 아래 ‘위인전 직접 검색’을 참조하여 신청해주시면 됩니다! 로그인해서 신청하기 버튼만 눌러주시면 되니 제발제발 해주세요!!!!!🥺🙏🙏🙏'
-        '위인전 직접검색 :'
-        '위인전 로그인 > 학습관리(상단) > 비교과관리(좌측메뉴) >단과대비교과 > ‘커디의 밤’ 검색 > 1,2,3차 확인 후 신청',
-    '먼지이이잉',
-  ];
-
-  final List dummyData = [
-    [
-      '먼지이잉잉',
-      '8분',
-      '오픈데이터 항목인데, 여기 들어가면 다전공 학생들의 통계랑 졸업자수, 개설된 강의들이 어떤 교재 쓰는지 다나와!!! 대박인데? ',
-    ],
-    [
-      '하하오오',
-      '2023년 10월 4일',
-      '6일(현지 시간) 미국 뉴욕증시. 장 초반 공포가 엄습했다. 고용지표는 예상보다 훨씬 견조했다. 곧바로 국채금리가 뛰었다. 장 초반 뉴욕증시 3대 지수는 1% 안팎 하락했다.'
-          '떨어지는 칼날, 지푸라기 하나라도 잡고 버텨보려는 심리 때문일까. 고용지표 중 임금 상승률이 예상보다 둔화됐다는 명분 하나를 찾아냈다. 국채금리가 장이 진행되면서 오름폭이 약간 완만해졌다. 이에 미국 뉴욕증시 3대 지수가 모두 올랐다. 결국 1% 안팎 상승 마감했다. 하루 사이 2~3% 롤러코스터를 탄 것이다.'
-    ],
-    [
-      '이게닉네임입니다',
-      '2023년 10월 1일',
-      '경찰은 이번 압수수색을 통해 아파트 철근 누락 등 부실시공 의혹 전반을 수사할 방침이다.'
-          '지난 4월29일 인천 검단아파트 주차장 지하 1층과 2층의 상부 슬래브가 붕괴되는 사고가 발생했다. 시공사는 GS건설, 발주사는 LH였다.'
-          '사고 건설사고조사위원회에 따르면 전단보강근(철근)이 제대로 시공되지 않은 점이 사고의 직접적인 원인으로 지목된다.'
-          '조사에 따르면 기둥과 슬래브(지붕층)를 연결해 강도를 높이는 역할을 하는 전단보강근은 구조설계 상 모든 기둥(32개소)에 필요했으나 설계에서 15개소가 빠졌고, 시공 단계에서도 4개소가 누락됐다. 총 32개소 중 제대로 시공된 건 13개소에 불과했다.'
-    ]
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +153,7 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 18.sp,
-                              color: MIXIN_BLACK_2,
+                              color: B_2,
                             ),
                           ),
                         ],
@@ -138,17 +174,26 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14.sp,
-                                color: MIXIN_BLACK_4,
+                                color: B_4,
                               ),
                             ),
                             Icon(
                               Icons.arrow_forward_ios_sharp,
                               size: 14.w,
-                              color: MIXIN_BLACK_4,
+                              color: B_4,
                             ),
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  MoimNoticeboardNoticeMainScreen(
+                                widget.moimId,
+                              ),
+                            ),
+                          );
+                        },
                       )
                     ],
                   ),
@@ -157,15 +202,17 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => MoimNoticeboardNoticeDetail(
-                                postInfo: dummyNotice)),
+                          builder: (context) => MoimNoticeboardNoticeDetail(
+                            noticeId: noticeId,
+                          ),
+                        ),
                       );
                     },
                     child: Container(
                       height: 134.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: MIXIN_BLACK_5),
+                        border: Border.all(color: B_5),
                       ),
                       padding: EdgeInsets.only(left: 20.w, top: 21.h),
                       child: Column(
@@ -201,7 +248,7 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                                   ),
                                   SizedBox(width: 6.w),
                                   Text(
-                                    dummyNotice[0],
+                                    viewCount.toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12.sp,
@@ -213,31 +260,37 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                           ]),
                           SizedBox(height: 21.h),
                           Text(
-                            dummyNotice[1],
+                            noticeTitle,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 20.sp,
-                              color: MIXIN_BLACK_2,
+                              color: B_2,
                             ),
                           ),
                           SizedBox(height: 10.h),
                           Row(
                             children: [
                               Text(
-                                dummyNotice[2],
+                                noticeCreateAt
+                                    .substring(0, 16)
+                                    .replaceAll('-', ' ')
+                                    .replaceRange(4, 4, '년')
+                                    .replaceRange(8, 8, '월')
+                                    .replaceRange(12, 12, '일')
+                                    .replaceAll('T', ' '),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: MIXIN_BLACK_4,
+                                  color: B_4,
                                 ),
                               ),
                               SizedBox(width: 13.w),
                               Text(
-                                '미확인',
+                                checked ? '확인' : '미확인',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: MIXIN_POINT_COLOR,
+                                  color: P_1,
                                 ),
                               )
                             ],
@@ -251,7 +304,7 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
             ),
             Divider(
               thickness: 6.w,
-              color: MIXIN_BLACK_5,
+              color: B_5,
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(24.w, 24.h, 24.w, 0),
@@ -271,7 +324,7 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18.sp,
-                          color: MIXIN_BLACK_2,
+                          color: B_2,
                         ),
                       )
                     ],
@@ -279,43 +332,56 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                   ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: dummyData.length,
+                      itemCount: postDataList.length,
                       itemBuilder: (context, index) {
+                        final memberData = memberDataList[index];
+                        final postData = postDataList[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      MoimNoticeboardPostDetail(
-                                          postInfo: dummyData[index])),
+                                builder: (context) => MoimNoticeboardPostDetail(
+                                  boardId: postData.boardId,
+                                ),
+                              ),
                             );
                           },
                           child: Padding(
                             padding: EdgeInsets.only(top: 24.h),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   children: [
-                                    ProfileImage36(),
+                                    ProfileImage30(
+                                      profilePicture:
+                                          memberData.profilePictureUrl,
+                                    ),
                                     SizedBox(width: 12.w),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          dummyData[index][0],
+                                          memberData.userNickName,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16.sp,
-                                            color: MIXIN_BLACK_1,
+                                            color: B_1,
                                           ),
                                         ),
                                         Text(
-                                          dummyData[index][1],
+                                          postData.createAt
+                                              .substring(0, 16)
+                                              .replaceAll('-', ' ')
+                                              .replaceRange(4, 4, '년')
+                                              .replaceRange(8, 8, '월')
+                                              .replaceRange(12, 12, '일')
+                                              .replaceAll('T', ' '),
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 11.sp,
-                                            color: MIXIN_BLACK_4,
+                                            color: B_4,
                                           ),
                                         )
                                       ],
@@ -327,12 +393,11 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                                 Padding(
                                   padding: EdgeInsets.only(left: 48.w),
                                   child: Text(
-                                    dummyData[index][2],
+                                    postData.title,
                                     style: TextStyle(
-                                      fontFamily: 'SUIT',
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16.sp,
-                                      color: MIXIN_BLACK_2,
+                                      color: B_2,
                                     ),
                                     maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
@@ -341,7 +406,7 @@ class _MoimNoticeboardScreenState extends State<MoimNoticeboardScreen> {
                                 SizedBox(height: 20.h),
                                 Divider(
                                   thickness: 1.w,
-                                  color: MIXIN_BLACK_5,
+                                  color: B_5,
                                 )
                               ],
                             ),

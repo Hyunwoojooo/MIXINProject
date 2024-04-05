@@ -1,16 +1,24 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mixin_mac_2/screens/main_screens/main_bottom_navigation_bar.dart';
+import 'package:mixin_mac_2/screens/moim/moim_apply_screen.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../../components/profile_gauge.dart';
 import '../../../const/colors.dart';
+import '../../../const/data.dart';
 import '../../../layout/custom_floating_action_button.dart';
 
 /*
   초록색 지우고 선택된 페이지만 검정색
  */
 class MoimDetailScreen extends StatefulWidget {
-  const MoimDetailScreen({Key? key}) : super(key: key);
+  final int moimId;
+
+  const MoimDetailScreen({required this.moimId, Key? key}) : super(key: key);
 
   @override
   State<MoimDetailScreen> createState() => _MoimDetailScreenState();
@@ -22,125 +30,248 @@ class _MoimDetailScreenState extends State<MoimDetailScreen>
   bool isTextFieldFocused = false;
   bool isis = false;
   bool isBookMark = false;
+  Dio dio = Dio();
+  String url = 'http://$ip/api/moimInfo?moimId=10';
+  final applyUrl = 'http://$ip/api/moim/join';
+
+  int moimId = 0;
+  String? moimName = '';
+  String? moimType = '';
+  List? moimTags = [];
+  String? moimThumbnailUrl = '';
+  String? categoryName = '';
+  String? categoryImage = '';
+  List? list;
+  String? currentMember = '';
+  String? totalMember = '';
+  String? moimDescription = '';
+  String? moimAdmissionCriteria = '';
+  int? moimLeaderUserId = 0;
+  String? moimLeaderUserNickName = '';
+  String? moimLeaderProfilePictureUrl = '';
+  String? dday = '';
+  String? genderRestriction = '';
+  String? moimFrequency = '';
+  String? moimRequirements = '';
+  List? moimMemberList = [];
+
+  void fetchData() async {
+    String? refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
+    // dio 사용
+    try {
+      Options options = Options(
+        headers: {
+          "Authorization": jsonDecode(refreshToken!)[0],
+        },
+        method: 'GET',
+      );
+
+      final Response resp = await dio.get(
+        url,
+        options: options,
+      );
+      print(resp);
+
+      Map<String, dynamic> data = await resp.data;
+      print('data = $data');
+
+      // 이 부분에서 moimMemberList 변수에 데이터 추가
+      List<dynamic> moimMemberData =
+          data['data']['moimMemberList']['moimMember'];
+      for (var moimData in moimMemberData) {
+        moimMemberList?.add(moimData);
+      }
+
+      moimName = data['data']['moimName'];
+      moimType = data['data']['moimType'];
+      moimTags = data['data']['moimTags'];
+      categoryName = data['data']['categoryName'];
+      categoryImage = data['data']['categoryUrl'];
+      currentMember = data['data']['currentMember'];
+      totalMember = data['data']['totalMember'];
+      moimDescription = data['data']['moimDescription'];
+      moimTags = data['data']['moimTags'];
+      moimThumbnailUrl = data['data']['moimThumbnailUrl'];
+      moimLeaderUserId = data['data']['moimLeader']['userId'];
+      moimLeaderUserNickName = data['data']['moimLeader']['userNickName'];
+      moimLeaderProfilePictureUrl =
+          data['data']['moimLeader']['profilePictureUrl'];
+      dday = data['data']['dday'];
+      genderRestriction = data['data']['genderRestriction'];
+      moimAdmissionCriteria = data['data']['moimAdmissionCriteria'];
+      moimFrequency = data['data']['moimFrequency'];
+      moimRequirements = data['data']['moimRequirements'];
+      moimId = data['data']['id'];
+
+    } catch (e) {
+      if (e is DioError) {
+        if (e.response != null) {
+          print('DioError response: ${e.response}');
+        } else {
+          print('DioError error: $e');
+        }
+      } else {
+        print('Unexpected error: $e');
+      }
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    moimId = widget.moimId;
+    print(moimId);
+    url = 'http://$ip/api/moimInfo?moimId=$moimId';
+    fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar 밑 여백 죽이기
-      appBar: AppBar(
-        toolbarHeight: 75.w,
-        leadingWidth: 71.w,
-        backgroundColor: WHITE,
-        elevation: 0.0,
-        leading: Padding(
-          padding: EdgeInsets.only(top: 30.h, bottom: 15.h),
-          child: IconButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Image.asset(
-              'assets/images/icons/back_icon_black_3x.png',
-              height: 26.h,
-              width: 26.w,
-            ),
-          ),
-        ),
-        title: Padding(
-          padding: EdgeInsets.only(top: 30.h, bottom: 15.h),
-          child: const Text('모임상세'),
-        ),
-        centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w600,
-          color: MIXIN_BLACK_1,
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(top: 30.h, right: 13.w, bottom: 15.h),
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                showModalBottomSheet(
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      height: 254.h,
-                      width: double.infinity,
-                      padding: EdgeInsets.only(top: 36.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(24.r),
-                          topRight: Radius.circular(24.r),
-                        ),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              '1:1로 문의하기',
-                              style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600,
-                                color: MIXIN_BLACK_1,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 16.h),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              '신고하기',
-                              style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600,
-                                color: MIXIN_BLACK_1,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 16.h),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'URL 공유하기',
-                              style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: MIXIN_BLACK_1),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-              icon: Image.asset(
-                'assets/images/more_vert.png',
-                width: 26.w,
-                height: 26.h,
-                color: MIXIN_BLACK_1,
-              ),
-            ),
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   toolbarHeight: 75.w,
+      //   leadingWidth: 71.w,
+      //   backgroundColor: WHITE,
+      //   elevation: 0.0,
+      //   leading: Padding(
+      //     padding: EdgeInsets.only(top: 30.h, bottom: 15.h),
+      //     child: IconButton(
+      //       padding: EdgeInsets.zero,
+      //       onPressed: () {
+      //         Navigator.pop(context);
+      //       },
+      //       icon: Image.asset(
+      //         'assets/images/icons/back_icon_black_3x.png',
+      //         height: 26.h,
+      //         width: 26.w,
+      //       ),
+      //     ),
+      //   ),
+      //   title: Padding(
+      //     padding: EdgeInsets.only(top: 30.h, bottom: 15.h),
+      //     child: const Text('모임상세'),
+      //   ),
+      //   centerTitle: true,
+      //   titleTextStyle: TextStyle(
+      //     fontSize: 20.sp,
+      //     fontWeight: FontWeight.w600,
+      //     color: MIXIN_BLACK_1,
+      //   ),
+      //   actions: [
+      //     Padding(
+      //       padding: EdgeInsets.only(top: 30.h, right: 13.w, bottom: 15.h),
+      //       child: IconButton(
+      //         padding: EdgeInsets.zero,
+      //         onPressed: () {
+      //           showModalBottomSheet(
+      //             backgroundColor: Colors.transparent,
+      //             context: context,
+      //             builder: (BuildContext context) {
+      //               return Container(
+      //                 height: 254.h,
+      //                 width: double.infinity,
+      //                 padding: EdgeInsets.only(top: 36.h),
+      //                 decoration: BoxDecoration(
+      //                   borderRadius: BorderRadius.only(
+      //                     topLeft: Radius.circular(24.r),
+      //                     topRight: Radius.circular(24.r),
+      //                   ),
+      //                   color: Colors.white,
+      //                 ),
+      //                 child: Column(
+      //                   children: [
+      //                     TextButton(
+      //                       onPressed: () {},
+      //                       child: Text(
+      //                         '1:1로 문의하기',
+      //                         style: TextStyle(
+      //                           fontSize: 20.sp,
+      //                           fontWeight: FontWeight.w600,
+      //                           color: MIXIN_BLACK_1,
+      //                         ),
+      //                       ),
+      //                     ),
+      //                     SizedBox(height: 16.h),
+      //                     TextButton(
+      //                       onPressed: () {},
+      //                       child: Text(
+      //                         '신고하기',
+      //                         style: TextStyle(
+      //                           fontSize: 20.sp,
+      //                           fontWeight: FontWeight.w600,
+      //                           color: MIXIN_BLACK_1,
+      //                         ),
+      //                       ),
+      //                     ),
+      //                     SizedBox(height: 16.h),
+      //                     TextButton(
+      //                       onPressed: () {},
+      //                       child: Text(
+      //                         'URL 공유하기',
+      //                         style: TextStyle(
+      //                             fontSize: 20.sp,
+      //                             fontWeight: FontWeight.w600,
+      //                             color: MIXIN_BLACK_1),
+      //                       ),
+      //                     ),
+      //                   ],
+      //                 ),
+      //               );
+      //             },
+      //           );
+      //         },
+      //         icon: Image.asset(
+      //           'assets/images/more_vert.png',
+      //           width: 26.w,
+      //           height: 26.h,
+      //           color: MIXIN_BLACK_1,
+      //         ),
+      //       ),
+      //     )
+      //   ],
+      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: isTextFieldFocused
           ? null
           : MoimDetailFloatingActionButton(
-        isBookMark: isBookMark,
+              isBookMark: isBookMark,
               iconOnPressed: () {
                 setState(() {
                   isBookMark = !isBookMark;
                 });
               },
-              onTap: () {
-                setState(() {});
+              onTap: () async {
+                if (moimRequirements.toString() == '승인 후 가입') {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => MoimApplyScreen(
+                              moimId: moimId,
+                            )),
+                  );
+                } else {
+                  String? refreshToken =
+                      await storage.read(key: REFRESH_TOKEN_KEY);
+
+                  final Response resp = await dio.post(applyUrl,
+                      options: Options(
+                        headers: {
+                          "Authorization": jsonDecode(refreshToken!)[0],
+                        },
+                      ),
+                      data: {
+                        'moimId': moimId,
+                      });
+                  print(resp);
+                  _showDialog(context, () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => MainBottomNavigationBar()),
+                    );
+                  });
+                }
               },
             ),
       body: GestureDetector(
@@ -151,334 +282,341 @@ class _MoimDetailScreenState extends State<MoimDetailScreen>
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           scrollDirection: Axis.vertical,
-          child: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      height: 220.h,
-                      child: Image.asset(
-                        'assets/images/maskgroup.png',
-                        fit: BoxFit.fill,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 390.h,
+                    child: Image.network(
+                      '$imageUrl$moimThumbnailUrl',
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 59.h,
+                    left: 16.w,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 6.h),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24.r),
+                        color: P_3,
+                      ),
+                      child: Text(
+                        moimType!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: P_1,
+                        ),
                       ),
                     ),
-                    Positioned(
-                      bottom: -1.w,
-                      child: Container(
-                        padding: EdgeInsets.only(left: 24.w, top: 20.h),
-                        height: 44.h,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          color: WHITE,
-                          border: Border.all(
-                            color: Colors.transparent,
+                  ),
+                  Positioned(
+                    bottom: 59.h,
+                    right: 16.w,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 17.w, vertical: 6.h),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24.r),
+                        color: B_5,
+                      ),
+                      child: Text(
+                        'D-$dday',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: P_1,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -1.w,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 24.w, top: 20.h),
+                      height: 44.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: WHITE,
+                        border: Border.all(
+                          color: Colors.transparent,
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(24.r),
+                          topRight: Radius.circular(24.r),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Image.network(
+                            '$imageUrl$categoryImage',
+                            height: 26.h,
+                            width: 26.w,
                           ),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(24.r),
-                            topRight: Radius.circular(24.r),
+                          SizedBox(width: 3.w),
+                          Text(
+                            categoryName!,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              color: B_2,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          moimName!,
+                          style: TextStyle(
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.w600,
+                            color: B_1,
                           ),
                         ),
-                        child: Row(
+                        Row(
                           children: [
-                            Image.asset(
-                              'assets/images/category_images/animal.png',
-                              height: 26.h,
-                              width: 26.w,
+                            Icon(
+                              Icons.person,
+                              color: B_4,
+                              size: 18.w,
                             ),
-                            SizedBox(width: 3.w),
+                            SizedBox(width: 4.w),
                             Text(
-                              '디자인',
+                              '$currentMember/$totalMember',
                               style: TextStyle(
-                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w500,
-                                color: MIXIN_BLACK_2,
+                                fontSize: 14.0.sp,
+                                color: B_4,
                               ),
                             ),
                           ],
-                        ),
-                      ),
+                        )
+                      ],
                     ),
-                  ],
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '필름감아',
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
-                              color: MIXIN_BLACK_1,
+                    SizedBox(height: 12.h),
+                    Row(
+                      children: [
+                        Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [
+                            Container(
+                              width: 34.w,
+                              height: 34.h,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: B_5,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 1.0,
+                                  )
+                                ],
+                              ),
+                              child: ClipOval(
+                                child: Image.network(
+                                  '$imageUrl$moimLeaderProfilePictureUrl',
+                                  fit: BoxFit.fill,
+                                  height: 31.h,
+                                  width: 31.w,
+                                ),
+                              ),
                             ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                color: MIXIN_BLACK_4,
-                                size: 18.w,
-                              ),
-                              SizedBox(width: 4.w),
-                              Text(
-                                '1/6',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.0.sp,
-                                  color: MIXIN_BLACK_4,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 12.h),
-                      Row(
-                        children: [
-                          Stack(
-                            alignment: AlignmentDirectional.center,
-                            children: [
-                              Container(
-                                width: 34.w,
-                                height: 34.h,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: MIXIN_BLACK_5,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey, blurRadius: 1.0)
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Center(
-                                    child: Image.asset(
-                                      'assets/images/default_profile_image.png',
-                                      fit: BoxFit.fitWidth,
-                                      height: 31.h,
-                                      width: 31.w,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const MiniProfileGauge(),
-                            ],
-                          ),
-                          SizedBox(width: 8.w),
-                          Text(
-                            '먼지이이잉',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                              color: MIXIN_BLACK_1,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 28.h),
-                      customRow('모임주기', '주 1회'),
-                      SizedBox(height: 20.h),
-                      customRow('가입조건', '남녀모두'),
-                      SizedBox(height: 20.h),
-                      customRow('승인여부', '승인 후 참여'),
-                      SizedBox(height: 20.h),
-                      customRow('모임규칙', '월 회비 10000원\n연애금지!!\n블라블라블라'),
-                      SizedBox(height: 24.h),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF0F1F5),
-                          borderRadius: BorderRadius.circular(16.r),
+                            const MiniProfileGauge(),
+                          ],
                         ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 16.h,
-                        ),
-                        child: Text(
-                          '🛎🛎🛎 합류하게 될 팀에 대해 알려드려요!\n'
-                          '• Server Developer (Product)는 토스뱅크의 메이커'
-                          '조직인 스쿼드(Squad)에 속해있어요. Produt Owner/'
-                          'Product Designer/Data Analyst 등 제품을 기획/개발'
-                          '하는데 몰두하는 서로 다른 직군의 멤버들이 직군이 하나의'
-                          '스쿼드를 이루어 작은 스타트업처럼 자율성을 갖고 일하고'
-                          '있어요.',
+                        SizedBox(width: 8.w),
+                        Text(
+                          moimLeaderUserNickName!,
                           style: TextStyle(
                             fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            color: MIXIN_BLACK_1,
+                            fontWeight: FontWeight.w600,
+                            color: B_1,
                           ),
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          '관심 24  조회 102',
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 28.h),
+                    customRow('모임주기', moimFrequency!),
+                    SizedBox(height: 20.h),
+                    customRow('가입성별', genderRestriction!),
+                    SizedBox(height: 20.h),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '승인여부',
                           style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            color: MIXIN_BLACK_3,
+                            color: const Color(0xFFB1B1B7),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 23.h),
-                      Text(
-                        '관련 태그',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_1,
-                        ),
-                      ),
-                      SizedBox(height: 22.h),
-                      SizedBox(
-                        height: 32.h,
-                        child: ListView(
-                          shrinkWrap: false,
-                          physics: const NeverScrollableScrollPhysics(),
-                          primary: false,
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 7.h),
-                              margin: EdgeInsets.only(right: 8.w),
-                              decoration: BoxDecoration(
-                                color: MIXIN_,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Text(
-                                '#필카',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: MIXIN_POINT_COLOR,
-                                ),
-                              ),
+                        SizedBox(width: 40.w),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12.w, vertical: 6.5.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            color: P_3,
+                          ),
+                          child: Text(
+                            moimRequirements!,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                              color: P_1,
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 7.h),
-                              margin: EdgeInsets.only(right: 8.w),
-                              decoration: BoxDecoration(
-                                color: MIXIN_,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Text(
-                                '#필카',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: MIXIN_POINT_COLOR,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12.w, vertical: 7.h),
-                              margin: EdgeInsets.only(right: 8.w),
-                              decoration: BoxDecoration(
-                                color: MIXIN_,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Text(
-                                '#필카',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: MIXIN_POINT_COLOR,
-                                ),
-                              ),
-                            )
-                          ],
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 20.h),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '가입조건',
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFFB1B1B7),
+                          ),
                         ),
+                        SizedBox(height: 20.h),
+                        Text(
+                          moimAdmissionCriteria!,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: B_1,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 24.h),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF0F1F5),
+                        borderRadius: BorderRadius.circular(16.r),
                       ),
-                      SizedBox(height: 48.h),
-                      Text(
-                        '구성원',
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 16.h,
+                      ),
+                      child: Text(
+                        moimDescription!,
                         style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_1,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: B_1,
                         ),
-                      ),
-                      SizedBox(height: 24.h),
-                      // SizedBox(
-                      //   height: 102.h,
-                      //   child: ListView(
-                      //     scrollDirection: Axis.horizontal,
-                      //     children: [
-                      //       memberList('먼지이잉'),
-                      //       SizedBox(width: 12.w),
-                      //       memberList('지넌'),
-                      //       SizedBox(width: 12.w),
-                      //       memberList('가지넌'),
-                      //       SizedBox(width: 12.w),
-                      //       memberList('나지넌'),
-                      //       SizedBox(width: 12.w),
-                      //       memberList('다지넌'),
-                      //       SizedBox(width: 12.w),
-                      //       memberList('라지넌'),
-                      //       SizedBox(width: 12.w),
-                      //       memberList('마지넌'),
-                      //       SizedBox(width: 100.w),
-                      //     ],
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                ),
-
-                // ------------------------------------------------------
-                // 해야됨
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isis == true;
-                    });
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(left: isis ? 0 : 24.w),
-                    child: SizedBox(
-                      height: 102.h,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          memberList('먼지이잉'),
-                          SizedBox(width: 12.w),
-                          memberList('현우'),
-                          SizedBox(width: 12.w),
-                          memberList('가현우'),
-                          SizedBox(width: 12.w),
-                          memberList('나현우'),
-                          SizedBox(width: 12.w),
-                          memberList('다현우'),
-                          SizedBox(width: 12.w),
-                          memberList('라현우'),
-                          SizedBox(width: 12.w),
-                          memberList('마현우'),
-                        ],
                       ),
                     ),
+                    SizedBox(height: 23.h),
+                    Text(
+                      '관련 태그',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                        color: B_1,
+                      ),
+                    ),
+                    SizedBox(height: 22.h),
+                    SizedBox(
+                      height: 32.h,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: moimTags?.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: P_3,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w, vertical: 5.w),
+                                  // margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
+                                  child: Text(
+                                    '#${moimTags?[index]}',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: P_1,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                SizedBox(width: 8.w),
+                              ],
+                            );
+                          }),
+                    ),
+                    SizedBox(height: 48.h),
+                    Text(
+                      '구성원',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                        color: B_1,
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                  ],
+                ),
+              ),
+
+              // ------------------------------------------------------
+              // 해야됨
+              Padding(
+                padding: EdgeInsets.only(left: 24.w),
+                child: SizedBox(
+                  height: 107.h,
+                  child: ListView.builder(
+                    itemCount: moimMemberList?.length,
+                    itemExtent: 84.w,
+                    itemBuilder: (context, index) {
+                      return memberList(
+                          moimMemberList?[index]['userNickName'],
+                          moimMemberList?[index]['profilePictureUrl']);
+                    },
+                    scrollDirection: Axis.horizontal,
                   ),
                 ),
-                SizedBox(height: 53.h),
-                SizedBox(height: 100.h),
-              ],
-            ),
+              ),
+              SizedBox(height: 53.h),
+              SizedBox(height: 100.h),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget memberList(String name) {
+  Widget memberList(String name, String profileImage) {
     return Column(
       children: [
         Stack(
@@ -489,7 +627,7 @@ class _MoimDetailScreenState extends State<MoimDetailScreen>
               height: 72.h,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                color: MIXIN_BLACK_5,
+                color: B_5,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey,
@@ -497,11 +635,12 @@ class _MoimDetailScreenState extends State<MoimDetailScreen>
                   )
                 ],
               ),
-              child: Center(
-                child: Image.asset(
-                  'assets/images/default_profile_image.png',
-                  height: 65.h,
-                  width: 65.w,
+              child: ClipOval(
+                child: Image.network(
+                  '$imageUrl$profileImage',
+                  height: 68.h,
+                  width: 68.w,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             ),
@@ -514,7 +653,7 @@ class _MoimDetailScreenState extends State<MoimDetailScreen>
           style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
-            color: MIXIN_BLACK_1,
+            color: B_1,
           ),
         ),
       ],
@@ -544,5 +683,18 @@ class _MoimDetailScreenState extends State<MoimDetailScreen>
         )
       ],
     );
+  }
+
+  void _showDialog(BuildContext context, void Function() onPressed) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            content: Text('가입이 완료되었습니다.'),
+            actions: [
+              ElevatedButton(onPressed: onPressed, child: Text('예')),
+            ],
+          );
+        });
   }
 }

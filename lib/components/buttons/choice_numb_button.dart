@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../const/colors.dart';
 import 'choice_numb/choice_numb.dart';
 
@@ -12,6 +13,18 @@ class ChoiceNumbButton extends StatefulWidget {
 
 class _ChoiceNumbButtonState extends State<ChoiceNumbButton> {
   int? memberCount;
+  String moimMemberLimit = '인원 수를 선택해 주세요.';
+
+  void _saveData(String key, String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
+
+  void _getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    moimMemberLimit = prefs.getString('moimMemberLimit')!;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +37,7 @@ class _ChoiceNumbButtonState extends State<ChoiceNumbButton> {
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: MIXIN_BLACK_5,
+              color: B_5,
               width: 1.5.w,
             ),
             borderRadius: BorderRadius.circular(8.r),
@@ -51,12 +64,13 @@ class _ChoiceNumbButtonState extends State<ChoiceNumbButton> {
                     Center(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: MIXIN_POINT_COLOR,
+                          backgroundColor: P_1,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0.r)),
+                              borderRadius: BorderRadius.circular(8.r)),
                           elevation: 0.0,
                         ),
                         onPressed: () async {
+                          _getData();
                           Navigator.of(context).pop();
                           setState(() {});
                         },
@@ -69,7 +83,6 @@ class _ChoiceNumbButtonState extends State<ChoiceNumbButton> {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18.sp,
-                              fontFamily: 'SUIT',
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -85,12 +98,11 @@ class _ChoiceNumbButtonState extends State<ChoiceNumbButton> {
         child: Container(
           alignment: Alignment.centerLeft,
           child: Text(
-            '인원 수를 선택해 주세요.',
+            moimMemberLimit,
             style: TextStyle(
-              fontFamily: 'SUIT',
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
-              color: MIXIN_BLACK_4,
+              color: moimMemberLimit == '인원 수를 선택해 주세요.' ? B_4 : B_1,
             ),
           ),
         ),

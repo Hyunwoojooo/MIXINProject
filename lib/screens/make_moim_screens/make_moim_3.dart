@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mixin_mac_2/const/data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../components/calendar.dart';
 import '../../const/colors.dart';
 import '../../layout/appbar_layout.dart';
+import '../../layout/custom_floating_action_button.dart';
 import '../../components/buttons/moim_cycle_button.dart';
 import '../../components/buttons/moim_rules.dart';
 import '../../components/buttons/moim_term_button.dart';
 import 'make_moim_4.dart';
-
 
 class MeetingPage3 extends StatefulWidget {
   const MeetingPage3({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class _MeetingPage3State extends State<MeetingPage3> {
   final String apiMoimImage = 'http://$ip/api/moim/image';
   String moimThumbnailFileUrl = '';
   List<String> tags = ['필카', '사진', '동아리', '여행'];
+  String moimDate = '정기모임 날짜를 선택해주세요';
 
   Future<void> getImage(ImageSource imageSource) async {
     final XFile? pickedFile = await picker.pickImage(source: imageSource);
@@ -57,7 +60,7 @@ class _MeetingPage3State extends State<MeetingPage3> {
             height: 188.h,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: MIXIN_BLACK_5,
+              color: B_5,
               borderRadius: BorderRadius.circular(24.r),
             ),
             alignment: Alignment.center,
@@ -66,7 +69,7 @@ class _MeetingPage3State extends State<MeetingPage3> {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 24.sp,
-                color: MIXIN_BLACK_4,
+                color: B_4,
               ),
             ),
           );
@@ -128,11 +131,11 @@ class _MeetingPage3State extends State<MeetingPage3> {
           "moimCategory": "IT/개발",
           "moimTags": tags,
           "moimDescription": "MCA는 전공동아리입니다.",
-          "moimMemberLimit": "20",
-          "genderRestriction": "남녀",
+          "moimMemberLimit": "5",
+          "genderRestriction": "상관없음",
           "moimAdmissionCriteria": "프로그램,설계 파트",
-          "moimRecruitmentPeriod": "2023.06.02-2023.07.02",
-          "moimFrequency": "주2회",
+          "moimRecruitmentPeriod": "2023.12.02-2023.12.04",
+          "moimFrequency": "주5회",
           "moimThumbnailFileUrl": "$moimThumbnailFileUrl",
           "moimRules": "없습니다",
         },
@@ -169,13 +172,13 @@ class _MeetingPage3State extends State<MeetingPage3> {
                     ),
                     SizedBox(width: 16.w),
                     Padding(
-                      padding: EdgeInsets.only(top: 43.h),
+                      padding: EdgeInsets.only(top: 18.h),
                       child: Text(
                         '모임 만들기',
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_1,
+                          color: B_1,
                         ),
                       ),
                     )
@@ -192,7 +195,7 @@ class _MeetingPage3State extends State<MeetingPage3> {
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_3,
+                          color: B_3,
                         ),
                       ),
                       SizedBox(height: 12.h),
@@ -204,7 +207,7 @@ class _MeetingPage3State extends State<MeetingPage3> {
                           height: 188.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                            color: MIXIN_BLACK_5,
+                            color: B_5,
                             borderRadius: BorderRadius.circular(24.r),
                           ),
                           // alignment: Alignment.center,
@@ -217,18 +220,118 @@ class _MeetingPage3State extends State<MeetingPage3> {
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_3,
+                          color: B_3,
                         ),
                       ),
                       SizedBox(height: 12.h),
-                      const MoimTermButton(),
+                      Container(
+                        height: 48.h,
+                        width: 342.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          border: Border.all(
+                            color: B_5,
+                            width: 1.5.w,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 16.0.w),
+                              child: Text(
+                                moimDate,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.sp,
+                                  color: moimDate.length == 10 ? B_1 : B_4,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 4.0.w),
+                              child: IconButton(
+                                icon: Image.asset(
+                                  'assets/images/calendar_3x.png',
+                                  width: 26.w,
+                                ),
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                        height: 504.h,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(24.r),
+                                            topRight: Radius.circular(24.r),
+                                          ),
+                                          color: Colors.white,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            const Calendar(),
+                                            SizedBox(
+                                              height: 56.h,
+                                              width: 342.w,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      P_1,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.r),
+                                                  ),
+                                                  elevation: 0.0,
+                                                ),
+                                                onPressed: () async {
+                                                  SharedPreferences prefs =
+                                                      await SharedPreferences
+                                                          .getInstance();
+                                                  if (prefs
+                                                      .getString(
+                                                          'regularMoimDate')!
+                                                      .isNotEmpty) {
+                                                    moimDate = prefs.getString(
+                                                        'regularMoimDate')!;
+                                                    moimDate = moimDate
+                                                        .substring(0, 10)
+                                                        .replaceAll('-', '.');
+                                                  }
+                                                  setState(() {});
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  '확인',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       SizedBox(height: 36.h),
                       Text(
                         '모임 주기',
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_3,
+                          color: B_3,
                         ),
                       ),
                       SizedBox(height: 12.h),
@@ -239,7 +342,7 @@ class _MeetingPage3State extends State<MeetingPage3> {
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600,
-                          color: MIXIN_BLACK_3,
+                          color: B_3,
                         ),
                       ),
                       SizedBox(height: 12.h),
@@ -252,7 +355,7 @@ class _MeetingPage3State extends State<MeetingPage3> {
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(342.w, 56.h),
                     elevation: 0,
-                    backgroundColor: MIXIN_POINT_COLOR,
+                    backgroundColor: P_1,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.r),
                     ),

@@ -38,7 +38,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomFloatingActionButton(
         text: '어플 이용하러 가기',
-        fillColor: MIXIN_POINT_COLOR,
+        fillColor: P_1,
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -64,7 +64,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w800,
-                          color: MIXIN_POINT_COLOR,
+                          color: P_1,
                         ),
                       ),
                       SizedBox(height: 5.h),
@@ -76,10 +76,10 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                             height: 65.h,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: MIXIN_BLACK_5,
+                              color: B_5,
                               boxShadow: [
                                 BoxShadow(
-                                  color: MIXIN_BLACK_4,
+                                  color: B_4,
                                   blurRadius: 2.0,
                                 ),
                               ],
@@ -111,7 +111,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                           fontFamily: 'SUIT',
                           fontWeight: FontWeight.w600,
                           fontSize: 18.0.sp,
-                          color: MIXIN_BLACK_1,
+                          color: B_1,
                         ),
                       ),
                       SizedBox(height: 5.0.h),
@@ -121,7 +121,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 14.sp,
-                          color: MIXIN_POINT_COLOR,
+                          color: P_1,
                         ),
                       ),
                       SizedBox(height: 5.0.h),
@@ -131,7 +131,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 14.sp,
-                          color: MIXIN_POINT_COLOR,
+                          color: P_1,
                         ),
                       ),
                     ],
@@ -144,7 +144,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 20.sp,
-                  color: MIXIN_BLACK_2,
+                  color: B_2,
                 ),
               ),
               SizedBox(height: 12.h),
@@ -177,7 +177,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0.sp,
-                      color: _currentPage == 0 ? MIXIN_47 : MIXIN_BLACK_4,
+                      color: _currentPage == 0 ? MIXIN_47 : B_4,
                     ),
                   ),
                   SizedBox(width: 54.w),
@@ -187,7 +187,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0.sp,
-                      color: _currentPage == 1 ? MIXIN_47 : MIXIN_BLACK_4,
+                      color: _currentPage == 1 ? MIXIN_47 : B_4,
                     ),
                   ),
                   SizedBox(width: 54.w),
@@ -197,7 +197,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                       fontFamily: 'SUIT',
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0.sp,
-                      color: _currentPage == 2 ? MIXIN_47 : MIXIN_BLACK_4,
+                      color: _currentPage == 2 ? MIXIN_47 : B_4,
                     ),
                   ),
                 ],
@@ -420,7 +420,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w600,
-                  color: MIXIN_BLACK_1,
+                  color: B_1,
                 ),
               ),
               SizedBox(height: 50.h),
@@ -430,7 +430,7 @@ class _CompleteProfileCardScreenState extends State<CompleteProfileCardScreen> {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: MIXIN_BLACK_4,
+                    color: B_4,
                   ),
                 ),
               ),

@@ -26,14 +26,14 @@ class ListMyFriend extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
-                  color: MIXIN_BLACK_1,
+                  color: B_1,
                 ),
               ),
               Text(
                 '$department / $schoolID',
                 style: TextStyle(
                   fontSize: 12.sp,
-                  color: MIXIN_POINT_COLOR,
+                  color: P_1,
                   fontWeight: FontWeight.w500,
                 ),
               ),

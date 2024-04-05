@@ -12,6 +12,7 @@ class MoimCycleButton extends StatefulWidget {
 
 class _MoimCycleButtonState extends State<MoimCycleButton> {
   int? newsAgency;
+  String moimFrequecy = '모임 주기를 선택해주세요';
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,10 @@ class _MoimCycleButtonState extends State<MoimCycleButton> {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: Colors.white,
-          foregroundColor: MIXIN_BLACK_4,
+          foregroundColor: B_4,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: MIXIN_BLACK_5,
+              color: B_5,
               width: 1.0.w,
             ),
             borderRadius: BorderRadius.circular(8.r),
@@ -51,15 +52,17 @@ class _MoimCycleButtonState extends State<MoimCycleButton> {
                       child: Center(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: MIXIN_POINT_COLOR,
+                            backgroundColor: P_1,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0.r),
                             ),
                             elevation: 0.0,
                           ),
                           onPressed: () async {
-                            Navigator.of(context).pop();
+                            moimFrequecy = '매주 4회';
                             setState(() {});
+
+                            Navigator.of(context).pop();
                             print(newsAgency);
                           },
                           child: SizedBox(
@@ -89,12 +92,11 @@ class _MoimCycleButtonState extends State<MoimCycleButton> {
         child: Container(
           alignment: Alignment.centerLeft,
           child: Text(
-            '모임 주기를 선택해주세요',
+            moimFrequecy,
             style: TextStyle(
-              fontFamily: 'SUIT',
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,
-              color: MIXIN_BLACK_4,
+              color: moimFrequecy.length > 6 ? B_4 : B_1,
             ),
           ),
         ),

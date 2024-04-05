@@ -33,7 +33,8 @@ class CategoryLayoutRound extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(36.r),
         ),
-        padding: EdgeInsets.only(left: 12.w, right: 16.w, top: 9.h, bottom: 9.h),
+        padding:
+            EdgeInsets.only(left: 12.w, right: 16.w, top: 9.h, bottom: 9.h),
         elevation: 0.0,
         backgroundColor: backgroundColor,
       ),
@@ -52,7 +53,7 @@ class CategoryLayoutRound extends StatelessWidget {
             style: TextStyle(
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              color: MIXIN_BLACK_1,
+              color: B_1,
             ),
           ),
         ],

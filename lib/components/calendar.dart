@@ -70,13 +70,13 @@ class _CalendarState extends State<Calendar> {
             fontSize: 16.sp,
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w600,
-            color: MIXIN_BLACK_1,
+            color: B_1,
           ),
           weekendStyle: TextStyle(
             fontSize: 16.sp,
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w600,
-            color: MIXIN_BLACK_1,
+            color: B_1,
           ),
         ),
         headerStyle: HeaderStyle(
@@ -88,39 +88,39 @@ class _CalendarState extends State<Calendar> {
             color: const Color(0xFF000000),
           ),
           headerPadding:
-              EdgeInsets.only(bottom: 15.h, top: 25.h, left: 10.w, right: 10.w),
+              EdgeInsets.only(bottom: 5.h, left: 10.w, right: 10.w),
         ),
         calendarStyle: CalendarStyle(
           tablePadding: EdgeInsets.symmetric(horizontal: 20.w),
           todayDecoration: const BoxDecoration(
-            color: MIXIN_,
+            color: P_3,
             shape: BoxShape.circle,
           ),
           todayTextStyle: TextStyle(
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
-            color: MIXIN_POINT_COLOR,
+            color: P_1,
           ),
           selectedDecoration: BoxDecoration(
-            color: MIXIN_POINT_COLOR,
+            color: P_1,
             shape: BoxShape.circle,
           ),
           selectedTextStyle: TextStyle(
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
-            color: MIXIN_,
+            color: P_3,
           ),
           defaultTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
-            color: MIXIN_BLACK_1,
+            color: B_1,
           ),
           weekendTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
-            color: MIXIN_BLACK_1,
+            color: B_1,
           ),
           rangeEndTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
@@ -130,7 +130,7 @@ class _CalendarState extends State<Calendar> {
           outsideTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
-            color: MIXIN_BLACK_4,
+            color: B_4,
           ),
         ),
       ),

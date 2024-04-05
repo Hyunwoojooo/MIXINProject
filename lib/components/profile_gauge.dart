@@ -78,7 +78,7 @@ class SmallProfileCardGauge extends StatelessWidget {
             width: 41.w,
             height: 41.h,
             decoration: BoxDecoration(
-              boxShadow: [BoxShadow(color: MIXIN_BLACK_4, blurRadius: 1.0)],
+              boxShadow: [BoxShadow(color: B_4, blurRadius: 1.0)],
               shape: BoxShape.circle,
               // color: Colors.transparent,
             ),
@@ -164,7 +164,7 @@ class ProfileCardGauge extends StatelessWidget {
             width: 64.w,
             height: 64.h,
             decoration: BoxDecoration(
-              boxShadow: [BoxShadow(color: MIXIN_BLACK_4, blurRadius: 1.0)],
+              boxShadow: [BoxShadow(color: B_4, blurRadius: 1.0)],
               shape: BoxShape.circle,
               // color: Colors.transparent,
             ),
@@ -283,8 +283,8 @@ class Ver72ProfileGauge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 72.h,
-      width: 72.w,
+      height: 74.h,
+      width: 74.w,
       child: SfRadialGauge(
         animationDuration: 2000,
         axes: <RadialAxis>[
@@ -357,7 +357,7 @@ class MiniProfileGauge extends StatelessWidget {
             showLabels: false,
             showTicks: false,
             axisLineStyle: const AxisLineStyle(
-              thickness: 5,
+              thickness: 2,
               cornerStyle: CornerStyle.bothFlat,
               color: Colors.white,
             ),

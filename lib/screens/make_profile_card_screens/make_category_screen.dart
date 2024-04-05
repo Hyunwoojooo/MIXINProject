@@ -30,8 +30,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
       floatingActionButton: CustomFloatingActionButton(
         text: '다음',
         fillColor: categoryList.where((element) => element).length >= 3
-            ? MIXIN_POINT_COLOR
-            : MIXIN_BLACK_4,
+            ? P_1
+            : B_4,
         onPressed: () async {
           if (categoryList.where((element) => element).length >= 3) {
             Navigator.of(context).push(
@@ -50,33 +50,34 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+            padding:  EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppbarLayout(
+                AppbarIconTextLayout(
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  text: '프로필카드제작',
+                  width: 99.w,
                 ),
-                SizedBox(height: 45.0.h),
+                SizedBox(height: 63.h),
                 const HeadlineText(text: '요즘 관심가는 주제가\n무엇인가요?'),
-                SizedBox(height: 12.0.h),
+                SizedBox(height: 10.h),
                 Container(
                   width: 201.w,
                   height: 36.h,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18.0.r),
-                    color: MIXIN_BLACK_5,
+                    borderRadius: BorderRadius.circular(18.r),
+                    color: B_5,
                   ),
                   child: Center(
                     child: Text(
                       '최소 3가지 이상 선택해주세요.',
                       style: TextStyle(
-                        fontFamily: 'SUIT',
                         fontWeight: FontWeight.w500,
-                        fontSize: 14.0.sp,
-                        color: MIXIN_POINT_COLOR,
+                        fontSize: 14.sp,
+                        color: P_1,
                       ),
                     ),
                   ),
@@ -86,7 +87,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                   children: [
                     CategoryLayoutRound(
                       borderSideColor:
-                          categoryList[0] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          categoryList[0] == true ? P_1 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[0] = !categoryList[0];
@@ -99,8 +100,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         print(selectedOptions);
                       },
                       mainSizedBoxWidth: 105.w,
-                      backgroundColor: categoryList[0] == true ? MIXIN_ : WHITE,
-                      containerColor: categoryList[0] == true ? MIXIN_ : WHITE,
+                      backgroundColor: categoryList[0] == true ? P_3 : B_5,
+                      containerColor: categoryList[0] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/IT.png',
                       text: 'IT/개발',
                     ),
@@ -108,8 +109,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 99.w,
                       borderSideColor:
-                          categoryList[1] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[1] == true ? MIXIN_ : WHITE,
+                          categoryList[1] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[1] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[1] = !categoryList[1];
@@ -121,16 +122,16 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[1] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[1] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/design.png',
                       text: '디자인',
                     ),
-                    SizedBox(width: 8.0.w),
+                    SizedBox(width: 8.w),
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 111.w,
                       borderSideColor:
-                          categoryList[2] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[2] == true ? MIXIN_ : WHITE,
+                          categoryList[2] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[2] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[2] = !categoryList[2];
@@ -142,7 +143,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[2] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[2] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/culture.png',
                       text: '문화활동',
                     ),
@@ -154,8 +155,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[3] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[3] == true ? MIXIN_ : WHITE,
+                          categoryList[3] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[3] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[3] = !categoryList[3];
@@ -167,7 +168,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[3] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[3] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/music.png',
                       text: '음악',
                     ),
@@ -175,8 +176,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[4] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[4] == true ? MIXIN_ : WHITE,
+                          categoryList[4] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[4] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[4] = !categoryList[4];
@@ -188,7 +189,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[4] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[4] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/trip.png',
                       text: '여행',
                     ),
@@ -196,8 +197,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 111.w,
                       borderSideColor:
-                          categoryList[5] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[5] == true ? MIXIN_ : WHITE,
+                          categoryList[5] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[5] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[5] = !categoryList[5];
@@ -209,7 +210,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[5] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[5] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/bongsa.png',
                       text: '봉사활동',
                     ),
@@ -221,8 +222,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[6] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[6] == true ? MIXIN_ : WHITE,
+                          categoryList[6] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[6] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[6] = !categoryList[6];
@@ -234,7 +235,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[6] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[6] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/health.png',
                       text: '운동',
                     ),
@@ -242,8 +243,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 111.w,
                       borderSideColor:
-                          categoryList[7] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[7] == true ? MIXIN_ : WHITE,
+                          categoryList[7] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[7] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[7] = !categoryList[7];
@@ -255,7 +256,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[7] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[7] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/animal.png',
                       text: '반려동물',
                     ),
@@ -263,8 +264,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[8] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[8] == true ? MIXIN_ : WHITE,
+                          categoryList[8] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[8] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[8] = !categoryList[8];
@@ -276,7 +277,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[8] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[8] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/sagyo.png',
                       text: '사교',
                     ),
@@ -289,8 +290,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[9] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[9] == true ? MIXIN_ : WHITE,
+                          categoryList[9] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[9] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[9] = !categoryList[9];
@@ -302,7 +303,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[9] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[9] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/class.png',
                       text: '수업',
                     ),
@@ -310,9 +311,9 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 99.w,
                       borderSideColor:
-                          categoryList[10] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          categoryList[10] == true ? P_1 : B_5,
                       backgroundColor:
-                          categoryList[10] == true ? MIXIN_ : WHITE,
+                          categoryList[10] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[10] = !categoryList[10];
@@ -324,7 +325,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[10] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[10] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/class.png',
                       text: '외국어',
                     ),
@@ -332,9 +333,9 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[11] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          categoryList[11] == true ? P_1 : B_5,
                       backgroundColor:
-                          categoryList[11] == true ? MIXIN_ : WHITE,
+                          categoryList[11] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[11] = !categoryList[11];
@@ -346,7 +347,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[11] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[11] == true ? P_3 : B_5,
                       imageAsset:
                           'assets/images/category_images/restuarant.png',
                       text: '맛집',
@@ -360,9 +361,9 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[12] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          categoryList[12] == true ? P_1 : B_5,
                       backgroundColor:
-                          categoryList[12] == true ? MIXIN_ : WHITE,
+                          categoryList[12] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[12] = !categoryList[12];
@@ -374,7 +375,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[12] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[12] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/cook.png',
                       text: '요리',
                     ),
@@ -382,9 +383,9 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 87.w,
                       borderSideColor:
-                          categoryList[13] == true ? MIXIN_2 : MIXIN_BLACK_5,
+                          categoryList[13] == true ? P_1 : B_5,
                       backgroundColor:
-                          categoryList[13] == true ? MIXIN_ : WHITE,
+                          categoryList[13] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[13] = !categoryList[13];
@@ -396,7 +397,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[13] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[13] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/finance.png',
                       text: '금융',
                     ),
@@ -404,8 +405,8 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                     CategoryLayoutRound(
                       mainSizedBoxWidth: 99.w,
                       borderSideColor:
-                      categoryList[14] == true ? MIXIN_2 : MIXIN_BLACK_5,
-                      backgroundColor: categoryList[14] == true ? MIXIN_ : WHITE,
+                      categoryList[14] == true ? P_1 : B_5,
+                      backgroundColor: categoryList[14] == true ? P_3 : B_5,
                       onPressed: () {
                         setState(() {
                           categoryList[14] = !categoryList[14];
@@ -417,7 +418,7 @@ class _MakeCategoryScreenState extends State<MakeCategoryScreen> {
                         });
                         print(selectedOptions);
                       },
-                      containerColor: categoryList[14] == true ? MIXIN_ : WHITE,
+                      containerColor: categoryList[14] == true ? P_3 : B_5,
                       imageAsset: 'assets/images/category_images/etc.png',
                       text: '기타',
                     ),

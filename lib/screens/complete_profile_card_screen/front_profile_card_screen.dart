@@ -65,7 +65,7 @@ class _FrontProfileCardScreenState extends State<FrontProfileCardScreen> {
                       fontFamily: 'SUIT',
                       fontSize: 14.0.sp,
                       fontWeight: FontWeight.w500,
-                      color: MIXIN_POINT_COLOR,
+                      color: P_1,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -112,7 +112,7 @@ class _FrontProfileCardScreenState extends State<FrontProfileCardScreen> {
                                 cornerStyle: CornerStyle.bothCurve,
                                 gradient: SweepGradient(
                                   colors: <Color>[
-                                    MIXIN_,
+                                    P_3,
                                     Color(0xFF51B49F),
                                   ],
                                   stops: <double>[
@@ -161,7 +161,7 @@ class _FrontProfileCardScreenState extends State<FrontProfileCardScreen> {
                       EdgeInsets.symmetric(horizontal: 32.w, vertical: 32.h),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(32.0.r),
-                    color: MIXIN_BLACK_5,
+                    color: B_5,
                   ),
                   child: Text(
                     userIntroduceText ?? ' ',

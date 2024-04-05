@@ -32,7 +32,7 @@ class InfoText extends StatelessWidget {
         fontFamily: 'SUIT',
         fontWeight: FontWeight.w500,
         fontSize: 12.0.sp,
-        color: MIXIN_BLACK_3,
+        color: B_3,
       ),
     );
   }
@@ -50,7 +50,7 @@ class BodyText extends StatelessWidget {
         fontFamily: 'SUIT',
         fontWeight: FontWeight.w500,
         fontSize: 12.0.sp,
-        color: MIXIN_BLACK_2,
+        color: B_2,
         height: 1.3.h,
       ),
     );
@@ -68,7 +68,7 @@ class HeadlineTosText extends StatelessWidget {
         fontFamily: 'SUIT',
         fontWeight: FontWeight.w600,
         fontSize: 20.0.sp,
-        color: MIXIN_BLACK_1,
+        color: B_1,
       ),
     );
   }

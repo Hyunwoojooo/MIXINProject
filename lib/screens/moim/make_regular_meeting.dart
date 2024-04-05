@@ -7,14 +7,16 @@ import 'package:mixin_mac_2/components/calendar.dart';
 import 'package:mixin_mac_2/components/custom_textformfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../components/buttons/choice_cycle/choice_cycle.dart';
-import '../components/buttons/choice_cycle/numbs.dart';
-import '../const/colors.dart';
-import '../const/data.dart';
-import '../layout/appbar_layout.dart';
+import '../../components/buttons/choice_cycle/choice_cycle.dart';
+import '../../components/buttons/choice_cycle/numbs.dart';
+import '../../const/colors.dart';
+import '../../const/data.dart';
+import '../../layout/appbar_layout.dart';
 
 class MakeRegularMeeting extends StatefulWidget {
-  const MakeRegularMeeting({super.key});
+  final int id;
+
+  const MakeRegularMeeting(this.id, {super.key});
 
   @override
   State<MakeRegularMeeting> createState() => _MakeRegularMeetingState();
@@ -24,17 +26,22 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
   TextEditingController? moimName;
   TextEditingController? moimPlace;
   TextEditingController? moimDescription;
-  String moimDate = '정기모임 날짜를 선택해주세요';
+  int? id;
+
+  String moimDate = '활동 날짜를 선택해주세요';
   String hour = '333';
   String minute = '00';
+  String? moimTime;
 
   Dio dio = Dio();
-  final String url = 'asdfa';
+  String? url;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    id = widget.id;
+    url = 'http://$ip/api/moim/activity';
     moimName = TextEditingController();
     moimPlace = TextEditingController();
     moimDescription = TextEditingController();
@@ -55,35 +62,38 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  text: '정기모임 만들기',
+                  text: '활동 만들기',
+                  width: 99,
                 ),
                 SizedBox(height: 43.h),
+                // 모임 이름
                 Text(
-                  '모임 이름',
+                  '활동 이름',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
-                    color: MIXIN_BLACK_3,
+                    color: B_3,
                   ),
                 ),
                 SizedBox(height: 12.h),
                 CustomTextFormField(
-                  hintText: '모임 이름을 설정해주세요',
+                  hintText: '활동 이름을 설정해주세요',
                   controller: moimName,
                   onChanged: (value) {
                     setState(() {});
                   },
                   borderColor:
-                      moimName!.text.isNotEmpty ? MIXIN_ : MIXIN_BLACK_5,
-                  fillColor: moimName!.text.isNotEmpty ? MIXIN_ : WHITE,
+                      moimName!.text.isNotEmpty ? P_3 : B_5,
+                  fillColor: moimName!.text.isNotEmpty ? P_3 : WHITE,
                 ),
                 SizedBox(height: 12.h),
+                // 모임 장소
                 Text(
-                  '모임 장소',
+                  '활동 장소',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
-                    color: MIXIN_BLACK_3,
+                    color: B_3,
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -94,28 +104,27 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                     setState(() {});
                   },
                   borderColor:
-                      moimPlace!.text.isNotEmpty ? MIXIN_ : MIXIN_BLACK_5,
-                  fillColor: moimPlace!.text.isNotEmpty ? MIXIN_ : WHITE,
+                      moimPlace!.text.isNotEmpty ? P_3 : B_5,
+                  fillColor: moimPlace!.text.isNotEmpty ? P_3 : WHITE,
                 ),
                 SizedBox(height: 12.h),
+                // 모임 날짜
                 Text(
-                  '모임 날짜',
+                  '활동 날짜',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
-                    color: MIXIN_BLACK_3,
+                    color: B_3,
                   ),
                 ),
                 SizedBox(height: 12.h),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        moimDate.length == 10 ? MIXIN_ : WHITE,
+                    backgroundColor: moimDate.length == 10 ? P_3 : WHITE,
                     side: BorderSide(
-                        color: moimDate.length == 10
-                            ? MIXIN_
-                            : MIXIN_BLACK_5,
-                        width: 1.5.w),
+                      color: moimDate.length == 10 ? P_3 : B_5,
+                      width: 1.5.w,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.r),
                     ),
@@ -131,7 +140,7 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                       context: context,
                       builder: (BuildContext context) {
                         return Container(
-                          height: 504.h,
+                          height: 534.h,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
@@ -148,7 +157,7 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                                 width: 342.w,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: MIXIN_POINT_COLOR,
+                                    backgroundColor: P_1,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.r),
                                     ),
@@ -166,6 +175,7 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                                           .substring(0, 10)
                                           .replaceAll('-', '.');
                                     }
+                                    print('moimDate : $moimDate');
                                     setState(() {});
                                     Navigator.of(context).pop();
                                   },
@@ -193,9 +203,9 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
-                          color: moimDate.length == 15
-                              ? MIXIN_BLACK_4
-                              : MIXIN_BLACK_1,
+                          color: moimDate.length == 10
+                              ? B_1
+                              : B_4,
                         ),
                       ),
                       Image.asset(
@@ -208,19 +218,19 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  '모임 시간',
+                  '활동 시간',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
-                    color: MIXIN_BLACK_3,
+                    color: B_3,
                   ),
                 ),
                 SizedBox(height: 12.h),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: hour.length == 3 ? WHITE : MIXIN_,
+                    backgroundColor: hour.length == 3 ? WHITE : P_3,
                     side: BorderSide(
-                      color: hour.length == 3 ? MIXIN_BLACK_5 : MIXIN_,
+                      color: hour.length == 3 ? B_5 : P_3,
                       width: 1.5.w,
                     ),
                     shape: RoundedRectangleBorder(
@@ -296,7 +306,7 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                                       magnification: 1.3,
                                       physics: const FixedExtentScrollPhysics(),
                                       onSelectedItemChanged: (int index) {
-                                        // 선택된 인덱스를 hour 변수에 저장
+                                        // 선택된 인덱스를 minute 변수에 저장
                                         minute = index.toString();
                                       },
                                       childDelegate:
@@ -318,7 +328,7 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                                 width: 342.w,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: MIXIN_POINT_COLOR,
+                                    backgroundColor: P_1,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8.r),
                                     ),
@@ -328,6 +338,9 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                                     SharedPreferences prefs =
                                         await SharedPreferences.getInstance();
                                     setState(() {});
+                                    print('$hour : $minute');
+                                    moimTime = '$hour:$minute';
+                                    print('moimTime : $moimTime');
                                     Navigator.of(context).pop();
                                   },
                                   child: Text(
@@ -349,14 +362,12 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                   child: Row(
                     children: [
                       Text(
-                        hour.length == 3
-                            ? '정기모임 시간을 선택해주세요'
-                            : '$hour : $minute',
+                        hour.length == 3 ? '활동 시간을 선택해주세요' : '$hour : $minute',
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           color:
-                              hour.length == 3 ? MIXIN_BLACK_4 : MIXIN_BLACK_1,
+                              hour.length == 3 ? B_4 : B_1,
                         ),
                       ),
                     ],
@@ -364,37 +375,38 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  '모임 정보',
+                  '활동 정보',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
-                    color: MIXIN_BLACK_3,
+                    color: B_3,
                   ),
                 ),
                 SizedBox(height: 12.h),
                 CustomTextFormField(
-                  hintText: '모임 정보를 입력해주세요',
+                  hintText: '활동 정보를 입력해주세요',
                   controller: moimDescription,
                   onChanged: (value) {
                     setState(() {});
                   },
                   height: 220.h,
                   borderColor:
-                      moimDescription!.text.isNotEmpty ? MIXIN_ : MIXIN_BLACK_5,
-                  fillColor: moimDescription!.text.isNotEmpty ? MIXIN_ : WHITE,
+                      moimDescription!.text.isNotEmpty ? P_3 : B_5,
+                  fillColor: moimDescription!.text.isNotEmpty ? P_3 : WHITE,
                   maxLines: 10,
                 ),
                 SizedBox(height: 24.h),
                 Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: MIXIN_POINT_COLOR,
+                      backgroundColor: P_1,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                       elevation: 0.0,
                     ),
                     onPressed: () {
+                      Navigator.pop(context);
                       fetch();
                     },
                     child: SizedBox(
@@ -420,8 +432,8 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
       ),
     );
   }
+
   void fetch() async {
-    String moimTime = '$hour : $minute';
     String? refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
 
     // dio 사용
@@ -434,14 +446,15 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
       );
 
       final Response resp = await dio.post(
-        url,
+        url!,
         options: options,
         data: {
-          "regularMoimName": moimName,
-          "regularMoimPlace": moimPlace,
-          "regularMoimDate": moimTime,
-          "regularMoimTime": moimTime,
-          "regularMoimDescription": moimDescription,
+          "moimId": id,
+          "activityName": moimName?.text,
+          "activitySpot": moimPlace?.text,
+          "activityDate": moimDate,
+          "activityTime": moimTime,
+          "activityInformation": moimDescription?.text,
         },
       );
       print(resp);
@@ -449,5 +462,4 @@ class _MakeRegularMeetingState extends State<MakeRegularMeeting> {
       print('DioError error: $e');
     }
   }
-
 }

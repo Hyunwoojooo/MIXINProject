@@ -27,13 +27,13 @@ class _MoimRulesState extends State<MoimRules> {
             fontSize: 16.sp,
             fontFamily: 'SUIT',
             fontWeight: FontWeight.w500,
-            color: MIXIN_BLACK_4,
+            color: B_4,
           ),
           counterStyle: TextStyle(
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,
             fontFamily: 'SUIT',
-            color: MIXIN_BLACK_4,
+            color: B_4,
           ),
           border: InputBorder.none,
           enabledBorder: OutlineInputBorder(
@@ -41,7 +41,7 @@ class _MoimRulesState extends State<MoimRules> {
               Radius.circular(8.r),
             ),
             borderSide: const BorderSide(
-              color: MIXIN_BLACK_5,
+              color: B_5,
             ),
           ),
           contentPadding:
